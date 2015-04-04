@@ -1,0 +1,7 @@
+{% load staticfiles %}
+
+<div>
+  {% for rolnik in rolnicy %}
+  <p><a href="{% url 'rolnicy-profil' id=rolnik.id %}"> {{ rolnik }} </a></p>
+  {% endfor %}
+</div>
