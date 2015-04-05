@@ -26,7 +26,10 @@ SECRET_KEY = '+2$_v36nz=uwuy4@g!rhn9-on@d3e32az-5d!$&pp_=762)h$f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['szyszko.no-ip.org']
+ALLOWED_HOSTS = [
+    'szyszko.no-ip.org',
+    'osgiliath',
+    ]
 
 
 # Application definition
@@ -106,11 +109,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'http://szyszko.no-ip.org/static/'
 STATIC_ROOT = '/srv/http/static/'
 STATICFILES_DIRS=(
     os.path.join(PROJECT_PATH, '../static'),
     )
 
-SITE_ID=1
+SITE_ID=2
 
