@@ -109,7 +109,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/srv/http/static/'
 STATICFILES_DIRS=(
-    os.path.join(PROJECT_PATH, 'static'),
+    os.path.join(PROJECT_PATH, '../static'),
     )
 
 SITE_ID=1
