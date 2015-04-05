@@ -38,9 +38,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'registration',
+    'rejestracja',
     'rolnicy',
 )
+
+ACCOUNT_ACTIVATION_DAYS = 7
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -107,3 +111,6 @@ STATIC_ROOT = '/srv/http/static/'
 STATICFILES_DIRS=(
     os.path.join(PROJECT_PATH, 'static'),
     )
+
+SITE_ID=os.environ['SITE_ID']
+

@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 class Rolnik(models.Model):
     Imie=models.CharField(max_length=20)
@@ -8,3 +9,8 @@ class Rolnik(models.Model):
     
     def __str__(self):
         return self.Imie+" "+self.Nazwisko+" "+self.Adres
+
+class RolnikForm(forms.ModelForm):
+    class Meta:
+        model=Rolnik
+        fields='__all__'
