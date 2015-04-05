@@ -112,5 +112,5 @@ STATICFILES_DIRS=(
     os.path.join(PROJECT_PATH, 'static'),
     )
 
-SITE_ID=os.environ['SITE_ID']
+SITE_ID=1
 
