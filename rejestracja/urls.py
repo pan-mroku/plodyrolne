@@ -4,6 +4,7 @@ from django.views.generic.base import TemplateView
 from rejestracja.views import RejestracjaView
 #from registration.backends.simple.views import RegistrationView
 from django.contrib.auth import views as auth_views
+from rolnicy.models import RolnikForm
 
 urlpatterns = patterns('',
     url(r'^$', RejestracjaView.as_view(), name='registration_register'),
