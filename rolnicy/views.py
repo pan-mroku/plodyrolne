@@ -1,5 +1,7 @@
+#-*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required
 from rolnicy.models import *
 
 def wszyscy(request):
@@ -14,4 +16,8 @@ def profil(request, id):
     context={'rolnik': rolnik[0]}
     return render(request, 'rolnicy_profil.html', context)
 
-
+@login_required
+def mojprofil(request):
+    context={'rolnik': Rolnik.objects.get(user=request.user)}
+    #prerobić na prfil, który można zmieniać
+    return render(request, 'rolnicy_profil.html', context)

@@ -5,4 +5,5 @@ import rolnicy.views as views
 urlpatterns = patterns('',
     url(r'^$', views.wszyscy, name='rolnicy-wszyscy'),
     url(r'^profil/(?P<id>[0-9]+)$', views.profil, name='rolnicy-profil'),
+    url(r'^mojprofil/', views.mojprofil, name='rolnicy-mojprofil'),
 )

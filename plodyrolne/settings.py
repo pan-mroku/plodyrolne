@@ -116,4 +116,3 @@ STATICFILES_DIRS=(
     )
 
 SITE_ID=2
-
