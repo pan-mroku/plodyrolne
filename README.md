@@ -5,7 +5,7 @@
         - profil
             - adres
             - panel administracyjny do zmiany danych
-              - cms (wiadomości pisane prszez administrację serwisu dla rolników)
+            - cms (wiadomości pisane prszez administrację serwisu dla rolników)
 
 - konsument
 - dostęp otwarty
@@ -15,8 +15,12 @@
     - interfejs reaktywny (dostoswuje się do rozdzielczości urządzenia)
 
 - 1.6 -> 1.8
-    - przy zmianach modeli: ```manage.py makemigrations
-      manage.py migrate```
-        - po pchnięciu na serwer: ```git> migrate-apps-db plodyrolne```
-    - używajmy ```{% url 'nazwa_urla' %}``` bo aplikacja jest w subfolderze
+    - przy zmianach modeli:
+    
+        ```
+manage.py makemigrations
+manage.py migrate
+        ```
+        - po pchnięciu na serwer: `git> migrate-apps-db plodyrolne`
+    - używajmy `{% url 'nazwa_urla' %}` bo aplikacja jest w subfolderze
 	- Django jęczy na foreignkey(unique=True). Powstało [OneToOneField](https://docs.djangoproject.com/en/1.8/ref/models/fields/#ref-onetoone)
