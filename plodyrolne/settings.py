@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'registration',
     'rejestracja',
     'rolnicy',
+    'klasyfikacje'
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
