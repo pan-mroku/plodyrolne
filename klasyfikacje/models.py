@@ -9,9 +9,14 @@ class NazwaGrupowania(models.Model):
 
 
 class SymbolPKWIU(models.Model):
-    symbol=models.TextField()
+    symbol=models.TextField(unique=True)
     nazwa=models.ForeignKey(NazwaGrupowania)
     dzieci=models.ManyToManyField(to='self', blank=True)
+
+    class Meta:
+        ordering = [
+            "symbol"
+        ]
 
     def __str__(self):              # __unicode__ on Python 2
         return self.symbol+": "+self.nazwa.__str__()

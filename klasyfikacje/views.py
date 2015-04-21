@@ -18,6 +18,7 @@ def parse():
     table_body = spis[0].find('tbody')
     rows = spis[0].find_all('tr')
     i=0
+    last_parent=None
     for row in rows:
         cols = row.find_all('td')
         cols = [ele.text.strip() for ele in cols]
@@ -32,10 +33,22 @@ def parse():
         try:
             symbol=SymbolPKWIU(symbol=cols[0],nazwa=nazwa)
             symbol.save()
+            if last_parent is None:
+                last_parent=symbol
+            if last_parent.symbol in symbol.symbol:
+                for dziecko in last_parent.dzieci.all():
+                    if dziecko.symbol in symbol.symbol:
+                        dziecko.dzieci.add(symbol)
+                        dziecko.save()
+                last_parent.dzieci.add(symbol)
+                last_parent.save()
+            else:
+                last_parent=symbol
         except IntegrityError:
             pass
         i+=1
     return True
+
 
 def przeparsuj_kategorie(request):
     data=parse()
