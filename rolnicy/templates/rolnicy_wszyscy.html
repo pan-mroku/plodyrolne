@@ -1,7 +1,10 @@
-{% load staticfiles %}
+{% extends 'base.html' %}
+
+{% block content %}
 
 <div>
   {% for rolnik in rolnicy %}
   <p><a href="{% url 'rolnicy-profil' id=rolnik.id %}"> {{ rolnik }} </a></p>
   {% endfor %}
 </div>
+{% endblock %}

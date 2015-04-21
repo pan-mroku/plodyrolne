@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+{% load staticfiles %}
+{% block content %}
+The rest of my content here.
+{% endblock %}
+<section id="footer" class="container content-section text-center">
+        <div class="row">
+            {% include 'footer.html' %}
+    </div>
+</section>
+</body>
+
+</html>
