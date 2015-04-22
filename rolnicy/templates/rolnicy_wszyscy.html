@@ -1,7 +1,18 @@
-{% load staticfiles %}
+{% extends 'base.html' %}
 
-<div>
-  {% for rolnik in rolnicy %}
-  <p><a href="{% url 'rolnicy-profil' id=rolnik.id %}"> {{ rolnik }} </a></p>
-  {% endfor %}
-</div>
+{% block content %}
+  <h3>Lista wszystkich rolnikow:</h3>
+  <table class="table table-hover">
+    <tr>
+      <th>Imie i Nazwisko</th>
+      <th>Adres</th>
+    </tr>
+    {% for rolnik in rolnicy %}
+      <tr>
+      <td><a href="{% url 'rolnicy-profil' id=rolnik.id %}">{{ rolnik.Imie }} {{ rolnik.Nazwisko }}</a></td>
+      <td><a href="{% url 'rolnicy-profil' id=rolnik.id %}">{{ rolnik.Adres }}</a></td>
+    </tr>
+    {% endfor %}
+
+  </table>
+{% endblock %}

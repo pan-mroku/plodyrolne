@@ -1,5 +1,21 @@
-{% load staticfiles %}
+{% extends 'base.html' %}
 
-<div>
-  <p> {{ rolnik.id }} {{ rolnik }} {{ asd }}</p>
-</div>
+{% block content %}
+  <h3>Profil rolnika: {{rolnik.Imie}} {{rolnik.Nazwisko}}</h3>
+  <dl class="dl-horizontal">
+    <dt>Id:</dt>
+    <dd>{{ rolnik.id }}</dd>
+    <dt>Imie i Nazwisko:</dt>
+    <dd>
+      {{rolnik.Imie}} {{rolnik.Nazwisko}}
+    </dd>
+    <dt>Adres:</dt>
+    <dd>
+      {{rolnik.Adres}}
+    </dd>
+    <dt>Mail:</dt>
+    <dd>
+      {{rolnik.user.email}}
+    </dd>
+  </dl>
+{% endblock %}
