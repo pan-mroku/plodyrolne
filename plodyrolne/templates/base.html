@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     {% include 'head.html' %}
-    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-        {% load staticfiles %}
+    {% load staticfiles %}
+    <body>
+        {% include 'menu.html' %}
         <div class="container-fluid">
             {% block content %}
-                The rest of my content here.
+                Loading content.
             {% endblock %}
         </div>
 
@@ -13,5 +14,8 @@
             {% include 'footer.html' %}
         </section>
     </body>
+
+
+
 
 </html>
