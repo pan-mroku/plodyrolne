@@ -20,4 +20,4 @@ def profil(request, id):
 def mojprofil(request):
     context={'rolnik': Rolnik.objects.get(user=request.user)}
     #prerobić na prfil, który można zmieniać
-    return render(request, 'rolnicy_profil.html', context)
+    return render(request, 'rolnicy_profil_edytuj.html', context)
