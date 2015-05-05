@@ -13,30 +13,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='NazwaGrupowania',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
-                ('nazwa', models.TextField()),
-            ],
-        ),
-        migrations.CreateModel(
-            name='StawkaVAT',
-            fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
-                ('wartosc', models.TextField()),
-                ('nazwa', models.ManyToManyField(to='klasyfikacje.NazwaGrupowania')),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
+                ('nazwa', models.TextField(unique=True)),
             ],
         ),
         migrations.CreateModel(
             name='SymbolPKWIU',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
-                ('symbol', models.TextField()),
-                ('dzieci', models.ManyToManyField(related_name='dzieci_rel_+', to='klasyfikacje.SymbolPKWIU')),
-                ('nazwa', models.OneToOneField(to='klasyfikacje.NazwaGrupowania')),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
+                ('symbol', models.TextField(unique=True)),
+                ('dzieci', models.ManyToManyField(to='klasyfikacje.SymbolPKWIU', blank=True)),
+                ('nazwa', models.ForeignKey(to='klasyfikacje.NazwaGrupowania')),
             ],
-        ),
-        migrations.AddField(
-            model_name='stawkavat',
-            name='symbol',
-            field=models.ManyToManyField(to='klasyfikacje.SymbolPKWIU'),
+            options={
+                'ordering': ['symbol'],
+            },
         ),
     ]

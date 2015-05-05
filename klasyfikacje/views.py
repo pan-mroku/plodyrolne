@@ -13,39 +13,32 @@ def parse():
     soup=BeautifulSoup(strona)
     spis = soup.findAll("table", { "class" : "spis" })
     wiersze = spis[0].find_all('tr')
-    i=0
     err=0
-    ostatni_rodzic=None
-    for wiersz in wiersze:
+    for wiersz in wiersze[1:]:
         cols = wiersz.find_all('td')
         cols = [ele.text.strip() for ele in cols]
-        if i==0:
-            i+=1
-            continue
+
         try:
-            nazwa=NazwaGrupowania(nazwa=cols[1])
+            nazwa, _dontcare = NazwaGrupowania.objects.get_or_create(nazwa=cols[1])
             nazwa.save()
         except IntegrityError:
-            nazwa=NazwaGrupowania.objects.get(nazwa=cols[1])
+            print("Error "+nazwa.nazwa)
+            err+=1
         try:
-            symbol=SymbolPKWIU(symbol=cols[0],nazwa=nazwa)
+            symbol, _dontcare = SymbolPKWIU.objects.get_or_create(symbol=cols[0],nazwa=nazwa)
             symbol.save()
-            if ostatni_rodzic is None:
-                ostatni_rodzic=symbol
-                continue
-            if ostatni_rodzic.symbol in symbol.symbol:
-                for dziecko_rodzica in ostatni_rodzic.dzieci.all():
-                    if dziecko_rodzica.symbol in symbol.symbol:
-                        dziecko_rodzica.dzieci.add(symbol)
-                        dziecko_rodzica.save()
-                if ostatni_rodzic.symbol is not symbol.symbol:
-                    ostatni_rodzic.dzieci.add(symbol)
-                    ostatni_rodzic.save()
-            else:
-                ostatni_rodzic=None
         except IntegrityError:
-            return
-        i+=1
+            print("Error "+symbol.symbol+" "+symbol.nazwa.nazwa)
+            err+=1
+        indeks_ostatniej_kropki = symbol.symbol.rfind('.')
+        if indeks_ostatniej_kropki != -1:
+            try:
+                rodzic = SymbolPKWIU.objects.get(symbol=symbol.symbol[:indeks_ostatniej_kropki])
+            except IntegrityError:
+                print(symbol.symbol+" "+nazwa.nazwa+" "+"nie znaleziono rodzica "+nazwa.nazwa[:indeks_ostatniej_kropki])
+                err+=1
+            rodzic.dzieci.add(symbol)
+            rodzic.save()
     print('bledy: '+str(err))
     return True
 

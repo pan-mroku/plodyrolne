@@ -11,7 +11,7 @@ class NazwaGrupowania(models.Model):
 class SymbolPKWIU(models.Model):
     symbol=models.TextField(unique=True)
     nazwa=models.ForeignKey(NazwaGrupowania)
-    dzieci=models.ManyToManyField(to='self', blank=True)
+    dzieci=models.ManyToManyField(to='self', blank=True, symmetrical=False)
 
     class Meta:
         ordering = [
