@@ -9,18 +9,15 @@ from .models import *
 
 
 def parse():
-    page=urlopen("http://www.klasyfikacje.gofin.pl/pkwiu/1,2,2,produkty-rolnictwa-i-lowiectwa-oraz-uslugi-wspomagajace.html#D01").read().decode('ISO-8859-2')
-    #print(_(page))
-    #print(_(page))
-    soup=BeautifulSoup(page)
-    #print(soup)
+    strona=urlopen("http://www.klasyfikacje.gofin.pl/pkwiu/1,2,2,produkty-rolnictwa-i-lowiectwa-oraz-uslugi-wspomagajace.html#D01").read().decode('ISO-8859-2')
+    soup=BeautifulSoup(strona)
     spis = soup.findAll("table", { "class" : "spis" })
-    table_body = spis[0].find('tbody')
-    rows = spis[0].find_all('tr')
+    wiersze = spis[0].find_all('tr')
     i=0
-    last_parent=None
-    for row in rows:
-        cols = row.find_all('td')
+    err=0
+    ostatni_rodzic=None
+    for wiersz in wiersze:
+        cols = wiersz.find_all('td')
         cols = [ele.text.strip() for ele in cols]
         if i==0:
             i+=1
@@ -33,25 +30,27 @@ def parse():
         try:
             symbol=SymbolPKWIU(symbol=cols[0],nazwa=nazwa)
             symbol.save()
-            if last_parent is None:
-                last_parent=symbol
-            if last_parent.symbol in symbol.symbol:
-                for dziecko in last_parent.dzieci.all():
-                    if dziecko.symbol in symbol.symbol:
-                        dziecko.dzieci.add(symbol)
-                        dziecko.save()
-                last_parent.dzieci.add(symbol)
-                last_parent.save()
+            if ostatni_rodzic is None:
+                ostatni_rodzic=symbol
+                continue
+            if ostatni_rodzic.symbol in symbol.symbol:
+                for dziecko_rodzica in ostatni_rodzic.dzieci.all():
+                    if dziecko_rodzica.symbol in symbol.symbol:
+                        dziecko_rodzica.dzieci.add(symbol)
+                        dziecko_rodzica.save()
+                if ostatni_rodzic.symbol is not symbol.symbol:
+                    ostatni_rodzic.dzieci.add(symbol)
+                    ostatni_rodzic.save()
             else:
-                last_parent=symbol
+                ostatni_rodzic=None
         except IntegrityError:
-            pass
+            return
         i+=1
+    print('bledy: '+str(err))
     return True
 
 
 def przeparsuj_kategorie(request):
-    data=parse()
     if parse() is False:
         return HttpResponse("Obrazajo papieza.")
     else:
