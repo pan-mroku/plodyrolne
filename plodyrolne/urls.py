@@ -4,8 +4,6 @@ from django.contrib.auth import views as auth_views
 from django_markdown import flatpages
 
 
-admin.autodiscover()
-flatpages.register()
 urlpatterns = patterns('',
     url(r'^$', include('rolnicy.urls')),
     url(r'^rolnicy/', include('rolnicy.urls')),

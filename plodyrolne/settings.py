@@ -113,6 +113,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = 'http://szyszko.no-ip.org/static/'
+#STATIC_URL = '/c/Users/nao/PythonProjects/plodyrolne/static/'
 STATIC_ROOT = '/srv/http/static/'
 #STATIC_ROOT = '/c/Users/nao/PythonProjects/plodyrolne/static/'
 STATICFILES_DIRS=(

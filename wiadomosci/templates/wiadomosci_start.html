@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
-
+{% load django_markdown %}
 {% block content %}
-<h3>Wiadomosci:</h3>
-<hr>
+    <h3>Wiadomosci:</h3>
+    <hr>
+    {% if user.is_authenticated %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h5>Temat:</h5>
+            {{form.subject}}
+            <hr>
+            <h5>Tresc wiadomosci:</h5>
+            {{form.content}}
+            <div id="submit"><input type="submit" value="Submit"></div>
+        </form>
+        {% markdown_media %}
+    {% endif %}
 {% endblock %}
