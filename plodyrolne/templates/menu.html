@@ -1,0 +1,68 @@
+<!-- http://getbootstrap.com/components/#navbar -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">
+        <div class="dropdown">
+          <button class="btn btn-primary btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
+            {% if user.is_authenticated %}
+              Zalogowany: <b>{{ user }}</b>
+            {% else %}
+              <b>Profil</b>
+            {% endif %}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            {% if user.is_authenticated %}
+              <li role="presentation">
+                <form role="form" action="{% url 'rolnicy-mojprofil' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary btn-xs">Edytuj profil</button>
+                </form>
+                <form role="form" action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary btn-xs">Wyloguj</button>
+                </form>
+              </li>
+            {% else %}
+                <form role="form" action="{% url 'login' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary btn-xs">Zaloguj sie</button>
+                </form>
+                <form role="form" action="{% url 'registration_register' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary btn-xs">Zarejestruj sie</button>
+                </form>
+            {% endif %}
+          </ul>
+
+        </div>
+      </a>
+    </div>
+    <!-- http://stackoverflow.com/questions/18075248/problems-with-the-responsive-navbar-in-bootstrap-3 -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="{% url 'rolnicy-wszyscy' %}">Rolnicy</a>
+        </li>
+        <li>
+          <a href="{% url 'rolnicy-wszyscy' %}">Wiadomosci <span class="badge">0</span></a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Znajdz rolnika">
+          </div>
+          <button type="submit" class="btn btn-default">Szukaj</button>
+        </form>
+      </ul>
+    </div>
+  </div>
+</nav>
