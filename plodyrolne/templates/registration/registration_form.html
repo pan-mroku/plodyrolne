@@ -1,10 +1,69 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="{% url 'registration_register' %}" method="post">
+    <h3>Rejestracja:</h3>
+    <hr>
+    <form action="{% url 'registration_register' %}" method="post" class="form-horizontal">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit" />
+        <div id="RegisterForm" class="form-group has-feedback">
+          <div class="col-sm-9">
+                <label class="col-sm-1 control-label" for="id_Imie">Imie:</label>
+                {% if form.Imie.errors %}
+                    <div class="input-group has-error">
+                        {{form.Imie.errors}}
+                {% else %}
+                    <div class="input-group">
+                {% endif %}
+                        <input type="text" id="id_Imie" class="form-control" name="Imie" />
+                    </div>
+                <label class="col-sm-1 control-label" for="id_Nazwisko">Nazwisko:</label>
+                {% if form.Nazwisko.errors %}
+                    <div class="input-group has-error">
+                        {{form.Nazwisko.errors}}
+                {% else %}
+                    <div class="input-group">
+                {% endif %}
+                        <input type="text" id="id_Nazwisko" class="form-control" name="Nazwisko" />
+                    </div>
+                <label class="col-sm-1 control-label" for="id_Adres">Adres:</label>
+                {% if form.Adres.errors %}
+                    <div class="input-group has-error">
+                        {{form.Adres.errors}}
+                {% else %}
+                    <div class="input-group">
+                {% endif %}
+                        <input type="text" id="id_Adres" class="form-control" name="Adres" />
+                    </div>
+                <label class="col-sm-1 control-label" for="id_email">E-mail:</label>
+                {% if form.email.errors %}
+                    <div class="input-group has-error">
+                        {{form.email.errors}}
+                {% else %}
+                    <div class="input-group">
+                {% endif %}
+                        <input type="text" id="id_email" class="form-control" name="email" />
+                    </div>
+                <label class="col-sm-1 control-label" for="id_password1">Haslo:</label>
+                {% if form.password1.errors %}
+                    <div class="input-group has-error">
+                        {{form.password1.errors}}
+                {% else %}
+                    <div class="input-group">
+                {% endif %}
+                        <input type="password" id="id_password1" class="form-control" placeholder="Haslo" name="password1" />
+                    </div>
+                <label class="col-sm-1 control-label" for="id_password1">Powtorz haslo:</label>
+                {% if form.password2.errors %}
+                    <div class="input-group has-error">
+                        {{form.password2.errors}}
+                {% else %}
+                    <div class="input-group">
+                {% endif %}
+                <input type="password" id="id_password2" class="form-control" placeholder="Haslo" name="password2" />
+                    </div>
+          </div>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary" />
     </form>
 {% endblock %}
 

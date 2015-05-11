@@ -45,7 +45,9 @@ INSTALLED_APPS = (
     'registration',
     'rejestracja',
     'rolnicy',
-    'klasyfikacje'
+    'klasyfikacje',
+    'wiadomosci',
+    'django_markdown'
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -112,6 +114,7 @@ USE_TZ = True
 
 STATIC_URL = 'http://szyszko.no-ip.org/static/'
 STATIC_ROOT = '/srv/http/static/'
+#STATIC_ROOT = '/c/Users/nao/PythonProjects/plodyrolne/static/'
 STATICFILES_DIRS=(
     os.path.join(PROJECT_PATH, '../static'),
     )

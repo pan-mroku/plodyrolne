@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(NazwaGrupowania)
 admin.site.register(SymbolPKWIU)
+
