@@ -1,14 +1,37 @@
 <!-- http://getbootstrap.com/components/#navbar -->
+    {% load staticfiles %}
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'startpage' %}">
+        <img alt="Agros" src="{% static 'img/logofinalagros.png' %}" width="25" height="25">
+      </a>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand">
+    </div>
+    <!-- http://stackoverflow.com/questions/18075248/problems-with-the-responsive-navbar-in-bootstrap-3 -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="{% url 'rolnicy-wszyscy' %}">Rolnicy</a>
+        </li>
+        <li>
+          <a href="{% url 'wiadomosci-start' %}">Wiadomosci</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Znajdz rolnika">
+          </div>
+          <button type="submit" class="btn btn-default">Szukaj</button>
+        </form>
+      </ul>
+      <a class="nav navbar-nav navbar-right navbar-brand">
         <div class="dropdown">
           <button class="btn btn-primary btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
             {% if user.is_authenticated %}
@@ -45,24 +68,6 @@
         </div>
       </a>
     </div>
-    <!-- http://stackoverflow.com/questions/18075248/problems-with-the-responsive-navbar-in-bootstrap-3 -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active">
-          <a href="{% url 'rolnicy-wszyscy' %}">Rolnicy</a>
-        </li>
-        <li>
-          <a href="{% url 'wiadomosci-start' %}">Wiadomosci <span class="badge">0</span></a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav">
-        <form class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Znajdz rolnika">
-          </div>
-          <button type="submit" class="btn btn-default">Szukaj</button>
-        </form>
-      </ul>
-    </div>
+
   </div>
 </nav>

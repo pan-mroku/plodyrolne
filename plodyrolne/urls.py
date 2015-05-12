@@ -1,11 +1,12 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 from django_markdown import flatpages
 
 
 urlpatterns = patterns('',
-    url(r'^$', include('rolnicy.urls')),
+    url(r'^$', TemplateView.as_view(template_name='welcome.html'), name='startpage'),
     url(r'^rolnicy/', include('rolnicy.urls')),
     url(r'^rejestracja/', include('rejestracja.urls')),
     url(r'^klasyfikacje/', include('klasyfikacje.urls')),
