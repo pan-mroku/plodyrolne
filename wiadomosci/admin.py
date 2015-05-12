@@ -1,3 +1,5 @@
 from django.contrib import admin
+from wiadomosci.models import Wiadomosc
+from django_markdown.admin import MarkdownModelAdmin
 
-# Register your models here.
+admin.site.register(Wiadomosc, MarkdownModelAdmin)

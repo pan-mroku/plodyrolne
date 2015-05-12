@@ -5,10 +5,7 @@ from wiadomosci.forms import WiadomoscForm
 from wiadomosci.models import Wiadomosc
 
 
-@login_required
 def start(request):
-    context={'wiadomosci_wyslane': Wiadomosc.objects.filter(nadawca=request.user),
-             'wiadomosci_odebrane':Wiadomosc.objects.filter(adresat=request.user),
-             'form':WiadomoscForm()
+    context={"wiadomosci":Wiadomosc.objects.all().order_by('data')
     }
     return render(request, 'wiadomosci_start.html', context)

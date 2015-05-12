@@ -121,3 +121,10 @@ STATICFILES_DIRS=(
     )
 
 SITE_ID=2
+
+MARKDOWN_EXTENSIONS = 'extra', 'codehilite'
+MARKDOWN_EXTENSION_CONFIGS = {
+    'codehilite': {
+        'linenums': False,
+    }
+}

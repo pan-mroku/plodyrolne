@@ -6,8 +6,6 @@ from django_markdown.widgets import MarkdownWidget
 
 
 class Wiadomosc(models.Model):
-    nadawca = models.OneToOneField(User, related_name='nadawca')
-    adresat = models.OneToOneField(User, related_name='adresat')
-    temat = models.TextField()
+    temat = models.TextField(default="")
     tresc = MarkdownField()
     data = models.DateTimeField(auto_now=True)

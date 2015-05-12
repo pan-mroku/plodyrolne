@@ -3,16 +3,22 @@
 {% block content %}
     <h3>Wiadomosci:</h3>
     <hr>
-    {% if user.is_authenticated %}
-        <form action="" method="POST">
-            {% csrf_token %}
-            <h5>Temat:</h5>
-            {{form.subject}}
-            <hr>
-            <h5>Tresc wiadomosci:</h5>
-            {{form.content}}
-            <div id="submit"><input type="submit" value="Submit"></div>
-        </form>
-        {% markdown_media %}
-    {% endif %}
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        {% for w in wiadomosci %}
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading{{w.id}}">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{w.id}}" aria-expanded="true" aria-controls="collapse{{w.id}}">
+                  ({{w.data}}) {{w.temat}}
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{w.id}}">
+              <div class="panel-body">
+                  {{ w.tresc|markdown }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
 {% endblock %}
