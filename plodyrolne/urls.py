@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^klasyfikacje/', include('klasyfikacje.urls')),
     url(r'^wiadomosci/', include('wiadomosci.urls')),
     url(r'^login/', auth_views.login, {'template_name': 'registration/login.html'}, name='login'),
-    url(r'^logout/', auth_views.logout, {'template_name': 'registration/logout.html'}, name='logout'),
+    url(r'^logout/', auth_views.logout, {'template_name': 'welcome.html'}, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
     url('^markdown/', include( 'django_markdown.urls')),
 )

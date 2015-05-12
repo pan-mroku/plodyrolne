@@ -5,63 +5,83 @@
     <hr>
     <form action="{% url 'registration_register' %}" method="post" class="form-horizontal">
         {% csrf_token %}
-        <div id="RegisterForm" class="form-group has-feedback">
-          <div class="col-sm-9">
-                <label class="col-sm-1 control-label" for="id_Imie">Imie:</label>
+        <div id="ImieForm" class="form-group has-feedback">
+            <div class="col-sm-9">
                 {% if form.Imie.errors %}
                     <div class="input-group has-error">
-                        {{form.Imie.errors}}
+                        <span class="input-group-addon">{{form.Imie.errors.as_text}}</span>
                 {% else %}
                     <div class="input-group">
                 {% endif %}
+                        <span class="input-group-addon">Imie:</span>
                         <input type="text" id="id_Imie" class="form-control" name="Imie" />
                     </div>
-                <label class="col-sm-1 control-label" for="id_Nazwisko">Nazwisko:</label>
-                {% if form.Nazwisko.errors %}
+            </div>
+        </div>
+        <div id="NazwiskoForm" class="form-group has-feedback">
+            <div class="col-sm-9">
+                {% if form.Imie.errors %}
                     <div class="input-group has-error">
-                        {{form.Nazwisko.errors}}
+                        <span class="input-group-addon">{{form.Nazwisko.errors.as_text}}</span>
                 {% else %}
                     <div class="input-group">
                 {% endif %}
+                        <span class="input-group-addon">Nazwisko:</span>
                         <input type="text" id="id_Nazwisko" class="form-control" name="Nazwisko" />
                     </div>
-                <label class="col-sm-1 control-label" for="id_Adres">Adres:</label>
+            </div>
+        </div>
+        <div id="AdresForm" class="form-group has-feedback">
+            <div class="col-sm-9">
                 {% if form.Adres.errors %}
                     <div class="input-group has-error">
-                        {{form.Adres.errors}}
+                        <span class="input-group-addon">{{form.Adres.errors.as_text}}</span>
                 {% else %}
                     <div class="input-group">
                 {% endif %}
+                        <span class="input-group-addon">Adres:</span>
                         <input type="text" id="id_Adres" class="form-control" name="Adres" />
                     </div>
-                <label class="col-sm-1 control-label" for="id_email">E-mail:</label>
+            </div>
+        </div>
+        <div id="EmailForm" class="form-group has-feedback">
+            <div class="col-sm-9">
                 {% if form.email.errors %}
                     <div class="input-group has-error">
-                        {{form.email.errors}}
+                        <span class="input-group-addon">{{form.email.errors.as_text}}</span>
                 {% else %}
                     <div class="input-group">
                 {% endif %}
+                        <span class="input-group-addon">Email:</span>
                         <input type="text" id="id_email" class="form-control" name="email" />
                     </div>
-                <label class="col-sm-1 control-label" for="id_password1">Haslo:</label>
+            </div>
+        </div>
+        <div id="Pass1Form" class="form-group has-feedback">
+            <div class="col-sm-9">
                 {% if form.password1.errors %}
                     <div class="input-group has-error">
-                        {{form.password1.errors}}
+                        <span class="input-group-addon">{{form.password1.errors.as_text}}</span>
                 {% else %}
                     <div class="input-group">
                 {% endif %}
-                        <input type="password" id="id_password1" class="form-control" placeholder="Haslo" name="password1" />
+                        <span class="input-group-addon">Haslo:</span>
+                        <input type="password" id="id_password1" class="form-control" placeholder="Haslo" name="password2" />
                     </div>
-                <label class="col-sm-1 control-label" for="id_password1">Powtorz haslo:</label>
+            </div>
+        </div>
+        <div id="Pass2Form" class="form-group has-feedback">
+            <div class="col-sm-9">
                 {% if form.password2.errors %}
                     <div class="input-group has-error">
-                        {{form.password2.errors}}
+                        <span class="input-group-addon">{{form.password2.errors.as_text}}</span>
                 {% else %}
                     <div class="input-group">
                 {% endif %}
-                <input type="password" id="id_password2" class="form-control" placeholder="Haslo" name="password2" />
+                        <span class="input-group-addon">Powtorz haslo:</span>
+                        <input type="password" id="id_password2" class="form-control" placeholder="Haslo" name="password2" />
                     </div>
-          </div>
+            </div>
         </div>
         <input type="submit" value="Submit" class="btn btn-primary" />
     </form>
