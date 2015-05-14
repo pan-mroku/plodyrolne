@@ -32,8 +32,15 @@ ALLOWED_HOSTS = [
     ]
 
 
+TREASURE_MAP = {
+    'BACKEND': 'treasuremap.backends.google.GoogleMapBackend',
+    'SIZE': (400, 600),
+    'MAP_OPTIONS': {
+        'zoom': 5
+    }
+}
+    
 # Application definition
-
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,10 +54,14 @@ INSTALLED_APPS = (
     'rolnicy',
     'klasyfikacje',
     'wiadomosci',
-    'django_markdown'
+    'django_markdown',
+    'treasuremap',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
+#?
+#LOGIN_URL='/login'
+#LOGIN_REDIRECT_URL='/rolnicy/mojprofil;'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

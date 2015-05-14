@@ -18,6 +18,7 @@ def profil(request, id):
 
 @login_required
 def mojprofil(request):
+    print (request.method)
     context={'rolnik': Rolnik.objects.get(user=request.user)}
     #prerobić na prfil, który można zmieniać
     return render(request, 'rolnicy_profil_edytuj.html', context)

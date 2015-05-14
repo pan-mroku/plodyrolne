@@ -9,6 +9,7 @@ from rolnicy.models import RolnikForm
 urlpatterns = patterns('',
     url(r'^$', RejestracjaView.as_view(), name='registration_register'),
     url(r'^sukces/$', TemplateView.as_view(template_name='registration/registration_complete.html'), name='registration_complete'),
+    (r'', include('registration.auth_urls')),
                        # url(r'^login/$',
                        #     auth_views.login,
                        #     {'template_name': 'registration/login.html'},
