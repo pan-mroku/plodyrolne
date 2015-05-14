@@ -3,14 +3,13 @@ from django import forms
 from registration.users import UserModel
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
-#from treasuremap.fields import LatLongField
 
 class Rolnik(models.Model):
     user=models.OneToOneField(User)
     Imie=models.CharField(max_length=20)
     Nazwisko=models.CharField(max_length=50)
     Adres=models.CharField(max_length=100)
-#    LatLong = LatLongField(blank=True)
+    #geo_placeholder
     
     def __str__(self):
         return self.Imie+" "+self.Nazwisko+" "+self.Adres+" "+self.user.email
@@ -25,7 +24,7 @@ class RolnikForm(forms.ModelForm):
             'Imie',
             'Nazwisko',
             'Adres',
-            'email'
+            'email',
             ]
         labels = {
             "Imie":_("Imię")

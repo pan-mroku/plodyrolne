@@ -1,36 +1,11 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
   <h3>Twoj profil: {{rolnik.Imie}} {{rolnik.Nazwisko}}</h3>
   <hr>
   <form class="form-horizontal">
-		{{ form.media }}
     {% csrf_token %}
-    <div id="imieINazwiskoEditForm" class="form-group has-success has-feedback">
-      <div class="col-sm-9">
-        <div class="input-group">
-          <span class="input-group-addon">Imie i nazwisko:</span>
-          <input type="text" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status" value="{{rolnik.Imie}} {{rolnik.Nazwisko}}" disabled="disabled">
-        </div>
-      </div>
-    </div>
-    <div id="adresEditForm" class="form-group has-success has-feedback">
-      <div class="col-sm-9">
-        <div class="input-group">
-          <span class="input-group-addon">Adres:</span>
-          <input type="text" class="form-control" id="inputGroupSuccess2" aria-describedby="inputGroupSuccess2Status" value="{{rolnik.Adres}}" disabled="disabled">
-        </div>
-      </div>
-    </div>
-    <div id="emailEditForm" class="form-group has-success has-feedback">
-      <div class="col-sm-9">
-        <div class="input-group">
-          <span class="input-group-addon">E-mail:</span>
-          <input type="text" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status" value="{{rolnik.user.email}}" disabled="disabled">
-        </div>
-      </div>
-    </div>
+		{{rolnik.as_p}}
     <input id="edytujButton" class="btn btn-primary" onclick="testFunction()" type="button" value="Edytuj">
     <input id="zapiszZmianyButton"  class="btn btn-primary" type="submit" value="Zapisz zmiany" disabled="disabled"/>
   </form>
