@@ -47,7 +47,6 @@ INSTALLED_APPS = (
 		'klasyfikacje',
 		'wiadomosci',
 		'django_markdown',
-
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -116,14 +115,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 USE_LOCAL_STATIC = True
-# if USE_LOCAL_STATIC:
-# 		STATIC_URL= os.path.join(BASE_DIR, '/static/')
-# 		STATIC_ROOT = STATIC_URL
-# else:
-# 		STATIC_URL = 'http://szyszko.no-ip.org/static/'
-# 		STATIC_ROOT = '/srv/http/static/'
-STATIC_URL = '/c/Users/nao/PythonProjects/plodyrolne/static/'
-STATIC_ROOT = '/c/Users/nao/PythonProjects/plodyrolne/static/'
+if USE_LOCAL_STATIC:
+		STATIC_URL= os.path.join(BASE_DIR, '/static/')
+		STATIC_ROOT = STATIC_URL
+else:
+		STATIC_URL = 'http://szyszko.no-ip.org/static/'
+		STATIC_ROOT = '/srv/http/static/'
+#STATIC_URL = '/c/Users/nao/PythonProjects/plodyrolne/static/'
+#STATIC_ROOT = '/c/Users/nao/PythonProjects/plodyrolne/static/'
 STATICFILES_DIRS=(
 		os.path.join(PROJECT_PATH, '../static'),
 		)
