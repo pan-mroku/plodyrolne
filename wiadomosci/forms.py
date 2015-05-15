@@ -1,8 +1,11 @@
+from pagedown.widgets import AdminPagedownWidget
 from django import forms
-from django_markdown.fields import MarkdownFormField
-from django_markdown.widgets import MarkdownWidget
+from wiadomosci.models import Wiadomosc
 
 
-class WiadomoscForm(forms.Form):
-    subject = forms.CharField(label="Temat")
-    content = forms.CharField(widget=MarkdownWidget(), label="Tresc wiadomosci")
+class WiadomoscForm(forms.ModelForm):
+    tresc = forms.CharField(widget=AdminPagedownWidget())
+
+    class Meta:
+        model = Wiadomosc
+        fields = '__all__'

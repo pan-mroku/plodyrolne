@@ -47,6 +47,8 @@ INSTALLED_APPS = (
 		'klasyfikacje',
 		'wiadomosci',
 		'django_markdown',
+		'django_google_maps',
+		'pagedown'
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -129,9 +131,5 @@ STATICFILES_DIRS=(
 
 SITE_ID=2
 
-MARKDOWN_EXTENSIONS = 'extra', 'codehilite'
-MARKDOWN_EXTENSION_CONFIGS = {
-		'codehilite': {
-				'linenums': False,
-		}
-}
+
+
