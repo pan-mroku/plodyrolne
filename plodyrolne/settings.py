@@ -48,7 +48,7 @@ INSTALLED_APPS = (
 		'wiadomosci',
 		'django_markdown',
 		'widget_tweaks',
-		'django_google_maps',
+		'location_field',
 		'pagedown'
 )
 
