@@ -1,14 +1,17 @@
 from django.db import models
 from django import forms
+from location_field.widgets import LocationWidget
 from registration.users import UserModel
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from location_field.models.plain import PlainLocationField
 
 class Rolnik(models.Model):
     user=models.OneToOneField(User)
     Imie=models.CharField(max_length=20)
     Nazwisko=models.CharField(max_length=50)
     Adres=models.CharField(max_length=100)
+    location = PlainLocationField(based_fields=[Adres], zoom=11)
     #geo_placeholder
     
     def __str__(self):
@@ -21,15 +24,16 @@ class RolnikForm(forms.ModelForm):
     class Meta:
         model = Rolnik
         fields = [
+            'location',
             'Imie',
             'Nazwisko',
-            'Adres',
             'email',
+            'Adres',
             ]
         labels = {
             "Imie":_("Imię")
             }
-            
+
     def clean_email(self):
         """
         Validate that the username is alphanumeric and is not already

@@ -3,17 +3,18 @@
 {% block content %}
     <h3>Wiadomosci:</h3>
     <hr>
+
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         {% for w in wiadomosci %}
           <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="heading{{w.id}}">
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{w.id}}" aria-expanded="true" aria-controls="collapse{{w.id}}">
-                  ({{w.data}}) {{w.temat}}
+                  <h4>{{w.temat}} <small>{{w.data}}</small></h4>
                 </a>
               </h4>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{w.id}}">
+            <div id="collapse{{w.id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{w.id}}">
               <div class="panel-body">
                   {{ w.tresc|markdown }}
               </div>

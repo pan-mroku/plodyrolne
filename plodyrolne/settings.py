@@ -47,7 +47,9 @@ INSTALLED_APPS = (
 		'klasyfikacje',
 		'wiadomosci',
 		'django_markdown',
-    'widget_tweaks',
+		'widget_tweaks',
+		'django_google_maps',
+		'pagedown'
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7

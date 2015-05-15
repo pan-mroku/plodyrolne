@@ -16,22 +16,3 @@
     </body>
 
 </html>
-
-<script>
-    function testFunction() {
-        if($("#inputGroupSuccess1").prop('disabled')==false)
-        {
-            $("#inputGroupSuccess1").prop('disabled', true);
-            $("#inputGroupSuccess2").prop('disabled', true);
-            $("#inputGroupSuccess3").prop('disabled', true);
-            $("#edytujButton").val("Edytuj");
-            $("#zapiszZmianyButton").prop('disabled', true);
-        } else {
-            $("#inputGroupSuccess1").prop('disabled', false);
-            $("#inputGroupSuccess2").prop('disabled', false);
-            $("#inputGroupSuccess3").prop('disabled', false);
-            $("#edytujButton").val("Anuluj");
-            $("#zapiszZmianyButton").prop('disabled', false);
-        }
-    }
-</script>
