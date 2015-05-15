@@ -1,29 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-#from registration.backends.simple.views import RegistrationView
 from registration.views import RegistrationView
 from rolnicy.models import RolnikForm, Rolnik
 from registration.users import UserModel
 from django.contrib.auth import authenticate, login
 from registration import signals
 
-class RejestracjaView(RegistrationView):
-#    def __init__(self):
-#        self.form_class=RolnikForm
-#    
-    def register(self, request, **cleaned_data):
-        print ("blebl")
-        email, password, imie, nazwisko, adres = cleaned_data['email'], cleaned_data['password1'], cleaned_data['Imie'], cleaned_data['Nazwisko'], cleaned_data['Adres'], 
+def register(request):
+    if request.method=="GET":
+        return render(request, 'registration/registration_form.html', {'form': RolnikForm()})
+    form=RolnikForm(request.POST)
+    if form.is_valid():
+        email=form.cleaned_data['email']
+        password=form.cleaned_data['password1']
+        rolnik=form.save(commit=False)
         UserModel().objects.create_user(email, email, password)
-
-        new_user = authenticate(username=email, password=password)
-        new_rolnik = Rolnik(user=new_user, Imie=imie, Nazwisko=nazwisko, Adres=adres)
-        new_rolnik.save();
-        login(request, new_user)
-        signals.user_registered.send(sender=self.__class__, user=new_user, request=request)
-        return new_user
-    def registration_allowed(self, request):
-        return True
-    
-    def get_success_url(self, request, user):
-        return('registration_complete', (), {})
+        rolnik.user=authenticate(username=email, password=password)
+        rolnik.save()
+        login(request, rolnik.user)
+        return redirect('rolnicy-mojprofil')
+    context={'form': form}
+    return render(request, 'registration/registration_form.html', context)
