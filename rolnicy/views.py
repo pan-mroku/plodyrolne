@@ -19,6 +19,7 @@ def profil(request, id):
 @login_required
 def mojprofil(request):
     print (request.method)
-    context={'rolnik': RolnikForm(instance=Rolnik.objects.get(user=request.user))}
+    rolnik=Rolnik.objects.get(user=request.user)
+    context={'f': RolnikForm(instance=rolnik), 'rolnik':rolnik}
     #prerobić na prfil, który można zmieniać
     return render(request, 'rolnicy_profil_edytuj.html', context)

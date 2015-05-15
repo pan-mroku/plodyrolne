@@ -3,8 +3,39 @@
 {% block content %}
   <h3>Twoj profil: {{rolnik.Imie}} {{rolnik.Nazwisko}}</h3>
   <hr>
-  <form class="form-horizontal">
-    {% csrf_token %}
-		{{rolnik.as_p}}
-  </form>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading0">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">
+              <h4>Dodawanie produktow:</h4>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading0">
+          <div class="panel-body">
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading1">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+              <h4>Edycja danych:</h4>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
+          <div class="panel-body">
+              <form class="form-horizontal">
+                  {% csrf_token %}
+                  {{f.as_p}}
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <h5></h5>
+
+
 {% endblock %}
