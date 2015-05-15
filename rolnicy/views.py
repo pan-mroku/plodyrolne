@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
+from klasyfikacje.models import SymbolPKWIU
 from rolnicy.models import *
 
 def wszyscy(request):
@@ -20,6 +21,7 @@ def profil(request, id):
 def mojprofil(request):
     print (request.method)
     rolnik=Rolnik.objects.get(user=request.user)
-    context={'f': RolnikForm(instance=rolnik), 'rolnik':rolnik}
+    symbole=SymbolPKWIU.objects.all()
+    context={'rolnik_form': RolnikForm(instance=rolnik), 'rolnik':rolnik, 'symbole' : symbole, 'produkty_form' : ProduktyForm(instance=rolnik)}
     #prerobić na prfil, który można zmieniać
     return render(request, 'rolnicy_profil_edytuj.html', context)

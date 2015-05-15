@@ -9,3 +9,6 @@ class Wiadomosc(models.Model):
     temat = models.TextField(default="")
     tresc = MarkdownField()
     data = models.DateTimeField(auto_now=True)
+
+    def __str__(self):              # __unicode__ on Python 2
+        return str(self.data)+": "+self.temat

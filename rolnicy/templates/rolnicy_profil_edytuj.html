@@ -8,12 +8,17 @@
         <div class="panel-heading" role="tab" id="heading0">
           <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">
-              <h4>Dodawanie produktow:</h4>
+              <h4>Dodawanie produktow: <small>Przytrzymaj klawisz CTRL by zaznaczyć większa ilosc produktow</small></h4>
             </a>
           </h4>
         </div>
         <div id="collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading0">
           <div class="panel-body">
+              <form class="form-horizontal">
+                {% csrf_token %}
+                {{ produkty_form.as_p }}
+                <input type="submit" value="Submit" class="btn btn-primary" />
+              </form>
           </div>
         </div>
       </div>
@@ -29,13 +34,12 @@
           <div class="panel-body">
               <form class="form-horizontal">
                   {% csrf_token %}
-                  {{f.as_p}}
+                  {{rolnik_form.as_p}}
               </form>
           </div>
         </div>
       </div>
     </div>
-  <h5></h5>
 
 
 {% endblock %}

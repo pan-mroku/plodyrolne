@@ -5,6 +5,8 @@ from registration.users import UserModel
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from location_field.models.plain import PlainLocationField
+from klasyfikacje.models import SymbolPKWIU
+
 
 class Rolnik(models.Model):
     user=models.OneToOneField(User)
@@ -12,10 +14,17 @@ class Rolnik(models.Model):
     Nazwisko=models.CharField(max_length=50)
     Adres=models.CharField(max_length=100)
     location = PlainLocationField(based_fields=[Adres], zoom=11)
-    #geo_placeholder
+    produkty = models.ManyToManyField(SymbolPKWIU, blank=True)
     
     def __str__(self):
         return self.Imie+" "+self.Nazwisko+" "+self.Adres+" "+self.user.email
+
+
+class ProduktyForm(forms.ModelForm):
+    class Meta:
+        model = Rolnik
+        fields = ['produkty']
+
 
 class RolnikForm(forms.ModelForm):
     email = forms.EmailField(label=_("E-mail"))
