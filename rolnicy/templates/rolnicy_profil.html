@@ -10,13 +10,15 @@
     <dd>
       {{rolnik.Imie}} {{rolnik.Nazwisko}}
     </dd>
-    <dt>Adres:</dt>
-    <dd>
-      {{rolnik.Adres}}
-    </dd>
     <dt>Mail:</dt>
     <dd>
       {{rolnik.user.email}}
     </dd>
+    <dt>Adres:</dt>
+    <dd>
+      {{rolnik.Adres}}
+    </dd>
+    <dt>Pozycja na mapie:</dt>
+    <dd>{{rolnik.location}}</dd>
   </dl>
 {% endblock %}

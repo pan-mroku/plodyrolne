@@ -6,7 +6,5 @@
   <form class="form-horizontal">
     {% csrf_token %}
 		{{rolnik.as_p}}
-    <input id="edytujButton" class="btn btn-primary" onclick="testFunction()" type="button" value="Edytuj">
-    <input id="zapiszZmianyButton"  class="btn btn-primary" type="submit" value="Zapisz zmiany" disabled="disabled"/>
   </form>
 {% endblock %}

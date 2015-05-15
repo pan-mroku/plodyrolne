@@ -47,6 +47,7 @@ INSTALLED_APPS = (
 		'klasyfikacje',
 		'wiadomosci',
 		'django_markdown',
+		'location_field'
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
