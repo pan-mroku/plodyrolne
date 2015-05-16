@@ -25,7 +25,6 @@ class ProduktyForm(forms.ModelForm):
         model = Rolnik
         fields = ['produkty']
 
-
 class RolnikForm(forms.ModelForm):
     email = forms.EmailField(label=_("E-mail"))
     password1 = forms.CharField(widget=forms.PasswordInput, label=_("Password"))
@@ -33,22 +32,29 @@ class RolnikForm(forms.ModelForm):
     class Meta:
         model = Rolnik
         fields = [
-            'location',
             'Imie',
             'Nazwisko',
             'email',
             'Adres',
+            'location',
             ]
         labels = {
             "Imie":_("Imię")
             }
 
-    def clean_email(self):
-        """
-        Validate that the username is alphanumeric and is not already
-        in use.
+    def __init__(self, *args, **kwargs):
+        super(RolnikForm, self).__init__(*args, **kwargs)
+        if kwargs.get('instance'):
+            self.fields['password1'].required = self.fields['password2'].required = False
+        self.fields['location'].required = False
 
-        """
+    def clean_email(self):
+        if self.instance.pk != None:
+            existing_user = UserModel().objects.filter(username__iexact=self.cleaned_data['email'])
+            existing = Rolnik.objects.get(pk=self.instance.pk)
+            if existing_user.exists() and existing.user != existing_user[0]:
+                raise forms.ValidationError(_("This email belongs to someone else."))
+            return self.cleaned_data['email']
         existing = UserModel().objects.filter(username__iexact=self.cleaned_data['email'])
         if existing.exists():
             raise forms.ValidationError(_("A user with that username already exists."))
@@ -56,15 +62,23 @@ class RolnikForm(forms.ModelForm):
             return self.cleaned_data['email']
 
     def clean(self):
-        """
-        Verifiy that the values entered into the two password fields
-        match. Note that an error here will end up in
-        ``non_field_errors()`` because it doesn't apply to a single
-        field.
-
-        """
-        if 'password1' in self.cleaned_data and 'password2' in self.cleaned_data:
-            if self.cleaned_data['password1'] != self.cleaned_data['password2']:
-                raise forms.ValidationError(_("The two password fields didn't match."))
+        if self.instance.pk != None:
+            if 'password1' not in self.cleaned_data and 'password2' not in self.cleaned_data:
+                return self.cleaned_data
+        if self.cleaned_data['password1'] != self.cleaned_data['password2']:
+            raise forms.ValidationError(_("The two password fields didn't match."))
+                
         return self.cleaned_data
 
+    def save(self, force_insert=False, force_update=False, commit=True):
+        m = super(RolnikForm, self).save(commit=False)
+        if self.instance.pk != None:
+            if self.cleaned_data['email']:
+                self.instance.user.username = self.instance.user.email = self.cleaned_data['email']
+                self.instance.user.save()
+            if self.cleaned_data['password1']:
+                self.instance.user.set_password(self.cleaned_data['password1'])
+                self.instance.user.save()
+        if commit:
+            m.save()
+        return m
