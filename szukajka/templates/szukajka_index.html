@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% block content %}
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+	<div id="collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading0">
+    <div class="panel-body">
+      <form class="form-horizontal" method="POST">
+				{% csrf_token %}
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="heading0">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">
+								<h4>Produkty: <small>Przytrzymaj klawisz CTRL by zaznaczyć większa ilosc produktow</small></h4>
+							</a>
+						</h4>
+					</div>
+					{% render_field produkty_form.non_field_errors %}
+          {{ produkty_form.as_p }}					
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="heading1">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+								<h4>Lokalizacja:</h4>
+							</a>
+						</h4>
+					</div>
+					<div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
+						<div class="panel-body">
+							{% render_field szukaj_form.non_field_errors %}
+							{% for field in szukaj_form %}
+							<div id="{{field.name}}Form" class="form-group has-feedback">
+								<div class="col-sm-9">
+									{% if field.errors %}
+									<div class="input-group has-error">
+										<span class="input-group-addon">{{field.errors.as_text}}</span>
+										{% else %}
+										<div class="input-group">
+											{% endif %}
+											<span class="input-group-addon">{{field.label}}</span>
+											{% render_field field class="form-control" %}
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								<input type="submit" value="Submit" class="btn btn-primary" />
+							</div>
+						</div>
+					</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -10,6 +10,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name='welcome.html'), name='startpage'),
     url(r'^rolnicy/', include('rolnicy.urls')),
+    url(r'^szukaj/', include('szukajka.urls')),
     url(r'^rejestracja/', include('rejestracja.urls')),
     url(r'^klasyfikacje/', include('klasyfikacje.urls')),
     url(r'^wiadomosci/', include('wiadomosci.urls')),

@@ -49,7 +49,8 @@ INSTALLED_APPS = (
 		'django_markdown',
 		'widget_tweaks',
 		'location_field',
-		'pagedown'
+		'pagedown',
+    'szukajka',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
