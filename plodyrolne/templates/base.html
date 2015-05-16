@@ -16,3 +16,21 @@
     </body>
 
 </html>
+<script>
+//http://stackoverflow.com/questions/5884644/calculate-the-current-location-longtitude-and-latitude
+navigator.geolocation.getCurrentPosition(
+  function(pos){
+    var lat = pos.coords.latitude;
+    var long = pos.coords.longitude;
+    // send coordinates to server, or display on map, if you wish
+    //buildMarker(map, lat, long, "TEST", 'red');
+    //alert("your position is:"+lat+";"+long);
+    $('#id_location').val(lat+", "+long);
+    $("#id_location").focus();
+  },
+  function(){
+    /* Handler if location could not be found */
+  }
+);
+
+</script>
