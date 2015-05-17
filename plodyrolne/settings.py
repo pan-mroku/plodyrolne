@@ -125,8 +125,8 @@ if USE_LOCAL_STATIC:
 else:
 		STATIC_URL = 'http://szyszko.no-ip.org/static/'
 		STATIC_ROOT = '/srv/http/static/'
-#STATIC_URL = '/c/Users/nao/PythonProjects/plodyrolne/static/'
-#STATIC_ROOT = '/c/Users/nao/PythonProjects/plodyrolne/static/'
+STATIC_URL = '/c/Users/nao/PythonProjects/plodyrolne/static/'
+STATIC_ROOT = '/c/Users/nao/PythonProjects/plodyrolne/static/'
 STATICFILES_DIRS=(
 		os.path.join(PROJECT_PATH, '../static'),
 		)

@@ -45,6 +45,6 @@ def parse():
 
 def przeparsuj_kategorie(request):
     if parse() is False:
-        return HttpResponse("Obrazajo papieza.")
+        return HttpResponse("Wystapil blad!")
     else:
-        return HttpResponse("Plody zakopane.")
+        return HttpResponse("Operacja zakonczona pozytywnie.")

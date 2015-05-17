@@ -20,13 +20,13 @@
           <a href="{% url 'rolnicy-wszyscy' %}">Rolnicy</a>
         </li>
         <li>
-          <a href="{% url 'wiadomosci-start' %}">Wiadomosci</a>
+          <a href="{% url 'wiadomosci-start' %}">Wiadomości</a>
         </li>
       </ul>
       <ul class="nav navbar-nav">
         <form class="navbar-form navbar-left" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Znajdz rolnika"/>
+            <input type="text" class="form-control" placeholder="Znajdź rolnika"/>
           </div>
           <button type="submit" class="btn btn-default">Szukaj</button>
         </form>
@@ -49,9 +49,9 @@
                   <li><a href="{% url 'logout' %}">Wyloguj</a></li>
             {% else %}
                   {% csrf_token %}
-                  <li><a href="{% url 'login' %}">Zaloguj sie</a></li>
+                  <li><a href="{% url 'login' %}">Zaloguj się</a></li>
                   {% csrf_token %}
-                  <li><a href="{% url 'registration_register' %}">Zarejestruj sie</a></li>
+                  <li><a href="{% url 'registration_register' %}">Zarejestruj się</a></li>
             {% endif %}
           </ul>
         </li>
