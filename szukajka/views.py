@@ -1,18 +1,27 @@
+from math import radians, sin, cos, atan2, sqrt
 from django.shortcuts import render
 from rolnicy.models import Rolnik
-import json
-from urllib.request import urlopen
+import requests
+
 
 from szukajka.forms import SzukajForm
 from rolnicy.models import ProduktyForm
 
+#http://stackoverflow.com/questions/1502590/calculate-distance-between-two-points-in-google-maps-v3
 def countDistance(jsonlatlong, locationlatlong):
     lat1 = float(jsonlatlong['lat'])
     lng1 = float(jsonlatlong['lng'])
     lat2, lng2 = locationlatlong.split(',')
     lat2 = float(lat2)
     lng2 = float(lng2)
-    return ((lat2-lat1)**2+(lng2-lng1)**2)**0.5
+    
+    R = 6378137; # Earth’s mean radius in meter
+    dLat = radians(lat2 - lat1);
+    dLong = radians(lng2 - lng1);
+    a = sin(dLat / 2) * sin(dLat / 2) + cos(radians(lat1)) * cos(radians(lat2)) * sin(dLong / 2) * sin(dLong / 2);
+    c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    d = R * c;
+    return d/1000.0; # returns the distance in kilometer
 
 def index(request):
     if request.method == 'GET':
@@ -31,11 +40,12 @@ def index(request):
             }
         if szukaj_form.is_valid() and produkty_form.is_valid():
             rolnicy = Rolnik.objects.all()
+            znalezieni = []
             for rolnik in rolnicy:
-                google_maps_json = urlopen('http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false' % rolnik.Adres).read().decode('ISO-8859-2')
-                location = json.loads(google_maps_json)['results'][0]['geometry']['location']
+                google_maps_json = requests.get("http://maps.googleapis.com/maps/api/geocode/json",
+                    params = {'address' : rolnik.Adres, 'sensor' : 'false'}).json()
+                location = google_maps_json['results'][0]['geometry']['location']
                 if countDistance(location, szukaj_form.cleaned_data['location']) <= szukaj_form.cleaned_data['distance']:
-                    print (rolnik.user.username)
-                    #@TODO: zwracanie mapy ze znacznikami
-                    #@HACK: distance powinno być w km, a teraz jest w stopniach
+                    znalezieni.append(rolnik)
+            context['rolnicy'] = znalezieni
     return render(request, 'szukajka_index.html', context)
