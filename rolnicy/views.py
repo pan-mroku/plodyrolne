@@ -42,8 +42,13 @@ def mojprofil(request):
             'email' : rolnik.user.email,
             }) # initial, żeby nie uznawało tego za zmianę
     context['rolnik_form'] = rolnik_form
-    produktyForm = ProduktyForm(request.POST, instance=rolnik)
-    context['produkty_form'] = produktyForm
+    produkty_form = ProduktyForm(
+        request.POST,
+        instance=rolnik,
+        initial = {
+            'email' : rolnik.user.email,
+            }) # initial, żeby nie uznawało tego za zmianę
+    context['produkty_form'] = produkty_form
 
     if rolnik_form.is_valid() and rolnik_form.has_changed():
         rolnik_form.save()
@@ -53,5 +58,8 @@ def mojprofil(request):
             logout(request)
             user = authenticate(username=username, password=rolnik_form.cleaned_data['password1'])
             login(request,user)
+        return redirect('rolnicy.views.mojprofil')
+    if produkty_form.is_valid() and produkty_form.has_changed():
+        produkty_form.save()
         return redirect('rolnicy.views.mojprofil')
     return render(request, 'rolnicy_profil_edytuj.html', context)
