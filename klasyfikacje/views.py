@@ -14,7 +14,7 @@ def parse():
     spis = soup.findAll("table", { "class" : "spis" })
     wiersze = spis[0].find_all('tr')
     err=0
-    for wiersz in wiersze[1:]:
+    for wiersz in wiersze[2:]:
         cols = wiersz.find_all('td')
         cols = [ele.text.strip() for ele in cols]
 
