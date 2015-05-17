@@ -1,10 +1,37 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
 
-    <form action="{% url 'login' %}" method="post">
+    <form action="{% url 'login' %}" method="post" class="form-horizontal">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit" />
+        {% render_field form.non_field_errors %}
+        <div id="usernameForm" class="form-group has-feedback">
+            <div class="col-sm-9">
+                {% if form.username.errors %}
+                    <div class="input-group has-error">
+                        <span class="input-group-addon">{{form.username.errors.as_text}}</span>
+                {% else %}
+                    <div class="input-group">
+                {% endif %}
+                        <span class="input-group-addon">Użytkownik:</span>
+                        {% render_field form.username class="form-control" %}
+                    </div>
+            </div>
+        </div>
+        <div id="passwordForm" class="form-group has-feedback">
+            <div class="col-sm-9">
+                {% if form.password.errors %}
+                    <div class="input-group has-error">
+                        <span class="input-group-addon">{{form.password.errors.as_text}}</span>
+                {% else %}
+                    <div class="input-group">
+                {% endif %}
+                        <span class="input-group-addon">Hasło:</span>
+                        {% render_field form.password class="form-control" %}
+                    </div>
+            </div>
+        </div>
+        <input type="submit" value="Wyślij" />
     </form>
 {% endblock %}

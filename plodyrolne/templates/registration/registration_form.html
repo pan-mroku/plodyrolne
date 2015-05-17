@@ -5,8 +5,8 @@
     <h3>Rejestracja:</h3>
     <hr>
     <form action="{% url 'registration_register' %}" method="post" class="form-horizontal">
-      {% csrf_token %}
-			{% render_field form.non_field_errors %}
+        {% csrf_token %}
+        {% render_field form.non_field_errors %}
         <div id="ImieForm" class="form-group has-feedback">
             <div class="col-sm-9">
                 {% if form.Imie.errors %}
@@ -85,7 +85,7 @@
                     </div>
             </div>
         </div>
-        <input type="submit" value="Submit" class="btn btn-primary" />
+        <input type="submit" value="Wyślij" class="btn btn-primary" />
     </form>
 {% endblock %}
 
