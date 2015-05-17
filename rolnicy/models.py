@@ -23,12 +23,6 @@ class Rolnik(models.Model):
 
 class ProduktyForm(forms.ModelForm):
     produkty = forms.ModelMultipleChoiceField(queryset=SymbolPKWIU.objects.all(), required=False, widget=forms.CheckboxSelectMultiple)
-    class Media:
-        css = {
-            'all':('/media/css/widgets.css',),
-        }
-        # Adding this javascript is crucial
-        js = ['/admin/jsi18n/']
 
     class Meta:
         model = Rolnik
