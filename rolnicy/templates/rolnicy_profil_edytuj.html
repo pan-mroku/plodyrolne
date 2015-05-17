@@ -6,29 +6,29 @@
   <hr>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="heading0">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">
-              <h4>Dodawanie produktów: <small>Przyrzymaj klawisz CTRL by zaznaczyć większą ilość produktów</small></h4>
-            </a>
-          </h4>
-        </div>
-        <div id="collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading0">
-          <div class="panel-body">
-              <form class="form-horizontal" method="POST">
-                {% csrf_token %}
-                {% render_field produkty_form.non_field_errors %}
-                {{ produkty_form.as_p }}
-                <input type="submit" value="Wyślij" class="btn btn-primary" />
-              </form>
-          </div>
-        </div>
+          <div class="panel-heading" role="tab" id="heading0">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse0" aria-expanded="false" aria-controls="collapse0">
+                      Dodawanie produktów: <small>Kliknij by zwinąć/rozwinąć</small>
+                </a>
+              </h4>
+            </div>
+            <div id="collapse0" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading0">
+              <div class="panel-body">
+                  <form class="form-horizontal" method="POST">
+                    {% csrf_token %}
+                    {% render_field produkty_form.non_field_errors %}
+                    {{ produkty_form.as_p }}
+                    <input type="submit" value="Wyślij" class="btn btn-primary" />
+                  </form>
+              </div>
+            </div>
       </div>
       <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="heading1">
           <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
-              <h4>Edycja danych:</h4>
+              Edycja danych: <small>Kliknij by zwinąć/rozwinąć</small>
             </a>
           </h4>
         </div>

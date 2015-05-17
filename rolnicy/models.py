@@ -1,3 +1,4 @@
+from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.db import models
 from django import forms
 from location_field.widgets import LocationWidget
@@ -21,9 +22,17 @@ class Rolnik(models.Model):
 
 
 class ProduktyForm(forms.ModelForm):
+    produkty = forms.ModelMultipleChoiceField(queryset=SymbolPKWIU.objects.all(), required=False, widget=forms.CheckboxSelectMultiple)
+    class Media:
+        css = {
+            'all':('/media/css/widgets.css',),
+        }
+        # Adding this javascript is crucial
+        js = ['/admin/jsi18n/']
+
     class Meta:
         model = Rolnik
-        fields = ['produkty']
+        fields=['produkty']
 
 class RolnikForm(forms.ModelForm):
     email = forms.EmailField(label=_("E-mail"))
@@ -41,6 +50,7 @@ class RolnikForm(forms.ModelForm):
         labels = {
             "Imie":_("Imię")
             }
+
 
     def __init__(self, *args, **kwargs):
         super(RolnikForm, self).__init__(*args, **kwargs)

@@ -42,7 +42,9 @@ def mojprofil(request):
             'email' : rolnik.user.email,
             }) # initial, żeby nie uznawało tego za zmianę
     context['rolnik_form'] = rolnik_form
-    context['produkty_form'] = ProduktyForm(request.POST, instance=rolnik)
+    produktyForm = ProduktyForm(request.POST, instance=rolnik)
+    context['produkty_form'] = produktyForm
+
     if rolnik_form.is_valid() and rolnik_form.has_changed():
         rolnik_form.save()
         #http://stackoverflow.com/questions/9507487/django-how-to-destroy-user-session-after-a-password-reset-change
