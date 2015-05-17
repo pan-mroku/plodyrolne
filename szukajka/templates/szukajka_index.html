@@ -49,10 +49,42 @@
 					</div>
 				</div>
 				<div class="panel-body">
-					<input type="submit" value="Submit" class="btn btn-primary" />
+					<input type="submit" value="Szukaj" class="btn btn-primary" />
 				</div>
 			</div>
 	</form>
+	{% if rolnicy %}
+	<div class="panel panel-default">
+		<div class="panel-heading" role="tab" id="heading2">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
+					Znalezione wyniki: <small>Kliknij by zwinąć/rozwinąć</small>
+				</a>
+			</h4>
+		</div>
+		<div id="collapse2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2">
+			<div class="panel-body">
+				<table class="table table-striped">
+					{% for rolnik in rolnicy %}
+					<tr>
+						<td><a href="{% url 'rolnicy-profil' id=rolnik.id %}">{{ rolnik.Imie }} {{ rolnik.Nazwisko }}</a></td>
+						<td><a href="{% url 'rolnicy-profil' id=rolnik.id %}">{{ rolnik.Adres }}</a></td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>	
+	{% endif %}
+	{% if not_found %}
+	<div class="panel panel-default">
+		<div class="panel-heading" role="tab" id="heading2">
+			<h4 class="panel-title">
+				{{not_found}}
+			</h4>
+		</div>
+	</div>
+	{% endif %}
 	</div>
 	<script>
 		//http://stackoverflow.com/questions/5884644/calculate-the-current-location-longtitude-and-latitude

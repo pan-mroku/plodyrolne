@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h3>Lista wszystkich rolników:</h3>
+<h3>Lista wszystkich rolników:</h3>
 <hr>
-  <table class="table table-striped">
-    <tr>
-      <th>Imię i Nazwisko</th>
-      <th>Adres</th>
-    </tr>
-    {% for rolnik in rolnicy %}
-      <tr>
-      <td><a href="{% url 'rolnicy-profil' id=rolnik.id %}">{{ rolnik.Imie }} {{ rolnik.Nazwisko }}</a></td>
-      <td><a href="{% url 'rolnicy-profil' id=rolnik.id %}">{{ rolnik.Adres }}</a></td>
-    </tr>
-    {% endfor %}
+<table class="table table-striped">
+  <tr>
+    <th>Imię i Nazwisko</th>
+    <th>Adres</th>
+  </tr>
+  {% for rolnik in rolnicy %}
+  <tr>
+    <td><a href="{% url 'rolnicy-profil' id=rolnik.id %}">{{ rolnik.Imie }} {{ rolnik.Nazwisko }}</a></td>
+    <td><a href="{% url 'rolnicy-profil' id=rolnik.id %}">{{ rolnik.Adres }}</a></td>
+  </tr>
+  {% endfor %}
 
-  </table>
+</table>
 {% endblock %}

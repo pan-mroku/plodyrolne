@@ -39,6 +39,7 @@ def index(request):
             'produkty_form': produkty_form,
             }
         if szukaj_form.is_valid() and produkty_form.is_valid():
+            produkty = produkty_form.cleaned_data['produkty']
             rolnicy = Rolnik.objects.all()
             znalezieni = []
             for rolnik in rolnicy:
@@ -46,6 +47,15 @@ def index(request):
                     params = {'address' : rolnik.Adres, 'sensor' : 'false'}).json()
                 location = google_maps_json['results'][0]['geometry']['location']
                 if countDistance(location, szukaj_form.cleaned_data['location']) <= szukaj_form.cleaned_data['distance']:
-                    znalezieni.append(rolnik)
-            context['rolnicy'] = znalezieni
+                    if not produkty:
+                        znalezieni.append(rolnik)
+                    else:
+                        for produkt in produkty:
+                            if produkt in rolnik.produkty.all():
+                                znalezieni.append(rolnik)
+                                break
+            if not znalezieni:
+                context['not_found'] = "Nie znaleziono rolników spełniajacych powyższe wymogi."
+            else:
+                context['rolnicy'] = znalezieni
     return render(request, 'szukajka_index.html', context)
