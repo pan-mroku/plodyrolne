@@ -7,7 +7,7 @@ from klasyfikacje.models import SymbolPKWIU
 from rolnicy.models import *
 
 def wszyscy(request):
-    context={'rolnicy': Rolnik.objects.all()}
+    context={'rolnicy': Rolnik.objects.all(), 'current_site':'rolnicy-wszyscy'}
     return render(request, 'rolnicy_wszyscy.html', context)
 
 @require_http_methods(["GET"]) # żeby na pewno było jakieś id?

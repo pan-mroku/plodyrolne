@@ -5,6 +5,5 @@ from wiadomosci.models import Wiadomosc
 
 
 def start(request):
-    context={"wiadomosci":Wiadomosc.objects.all().order_by('data')
-    }
+    context={"wiadomosci":Wiadomosc.objects.all().order_by('data'), 'current_site':'wiadomosci-start'}
     return render(request, 'wiadomosci_start.html', context)
