@@ -64,7 +64,8 @@
 		//buildMarker(map, lat, long, "TEST", 'red');
 		//alert("your position is:"+lat+";"+long);
 		$('#id_location').val(lat+", "+long);
-		$("#id_location").focus();
+		$('#id_address').val(lat+", "+long);
+		$("#id_address").focus();
 		},
 		function(){
 		/* Handler if location could not be found */
