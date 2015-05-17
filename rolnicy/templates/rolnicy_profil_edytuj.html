@@ -36,26 +36,25 @@
           <div class="panel-body">
             <form class="form-horizontal" method="POST">
               {% csrf_token %}
-							{% render_field rolnik_form.non_field_errors %}
-							{% for field in rolnik_form %}
-							<div id="{{field.name}}Form" class="form-group has-feedback">
-								<div class="col-sm-9">
-									{% if field.errors %}
-									<div class="input-group has-error">
-										<span class="input-group-addon">{{field.errors.as_text}}</span>
-										{% else %}
-										<div class="input-group">
-											{% endif %}
-											<span class="input-group-addon">{{field.label}}</span>
-											{% render_field field class="form-control" %}
-										</div>
-									</div>
-								</div>
-                              </div>
-							{% endfor %}
-							<input type="submit" value="Submit" class="btn btn-primary" />
+              {% render_field rolnik_form.non_field_errors %}
+              {% for field in rolnik_form %}
+              <div id="{{field.name}}Form" class="form-group has-feedback">
+                  <div class="col-sm-9">
+                      {% if field.errors %}
+                      <div class="input-group has-error">
+                          <span class="input-group-addon">{{field.errors.as_text}}</span>
+                      {% else %}
+                          <div class="input-group">
+                      {% endif %}
+                            <span class="input-group-addon">{{field.label}}</span>
+                            {% render_field field class="form-control" %}
+                          </div>
+                      </div>
+                  </div>
+              {% endfor %}
+              <input type="submit" value="Submit" class="btn btn-primary" />
             </form>
-            </div>
+          </div>
         </div>
       </div>
     </div>
