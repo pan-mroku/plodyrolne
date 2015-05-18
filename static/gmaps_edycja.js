@@ -19,21 +19,22 @@ $(document).ready(function(){
 		
 		var init_lat = 52;
 		var init_lng = 20;
-		
+
+		//Po namyśle to chyba średni pomysł
 		//http://stackoverflow.com/questions/5884644/calculate-the-current-location-longtitude-and-latitude
-		navigator.geolocation.getCurrentPosition(
-				function(pos){
-						init_lat = pos.coords.latitude;
-						init_lng = pos.coords.longitude;
-						// send coordinates to server, or display on map, if you wish
-						//buildMarker(map, lat, long, "TEST", 'red');
-						//alert("your position is:"+lat+";"+long);
-						$('#id_Adres').val(init_lat+", "+init_lng);
-						geocode();
-				},
-				function(){
-						/* Handler if location could not be found */
-				});
+		// navigator.geolocation.getCurrentPosition(
+		// 		function(pos){
+		// 				init_lat = pos.coords.latitude;
+		// 				init_lng = pos.coords.longitude;
+		// 				// send coordinates to server, or display on map, if you wish
+		// 				//buildMarker(map, lat, long, "TEST", 'red');
+		// 				//alert("your position is:"+lat+";"+long);
+		// 				$('#id_Adres').val(init_lat+", "+init_lng);
+		// 				geocode();
+		// 		},
+		// 		function(){
+		// 				/* Handler if location could not be found */
+		// 		});
 		
 		map = new GMaps({
 				div: '#gmap',
@@ -59,6 +60,7 @@ $(document).ready(function(){
 		
 		geocode();
 		
+		//A może .keypress?
 		$("#id_Adres").change(function(){
 				geocode();
 		});
