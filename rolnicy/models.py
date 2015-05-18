@@ -1,11 +1,9 @@
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.db import models
 from django import forms
-from location_field.widgets import LocationWidget
 from registration.users import UserModel
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
-from location_field.models.plain import PlainLocationField
 from klasyfikacje.models import SymbolPKWIU
 
 
@@ -14,7 +12,6 @@ class Rolnik(models.Model):
     Imie=models.CharField(max_length=20)
     Nazwisko=models.CharField(max_length=50)
     Adres=models.CharField(max_length=100)
-    location = PlainLocationField(based_fields=[Adres], zoom=11)
     produkty = models.ManyToManyField(SymbolPKWIU, blank=True)
     
     def __str__(self):
@@ -39,7 +36,6 @@ class RolnikForm(forms.ModelForm):
             'Nazwisko',
             'email',
             'Adres',
-            'location',
             ]
         labels = {
             "Imie":_("Imię")
@@ -50,7 +46,6 @@ class RolnikForm(forms.ModelForm):
         super(RolnikForm, self).__init__(*args, **kwargs)
         if kwargs.get('instance'):
             self.fields['password1'].required = self.fields['password2'].required = False
-        self.fields['location'].required = False
 
     def clean_email(self):
         if self.instance.pk != None:

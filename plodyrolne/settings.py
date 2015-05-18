@@ -49,7 +49,6 @@ INSTALLED_APPS = (
 		'szukajka',
 		'django_markdown',
 		'widget_tweaks',
-		'location_field',
 		'pagedown',
 )
 
