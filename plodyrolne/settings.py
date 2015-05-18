@@ -46,11 +46,11 @@ INSTALLED_APPS = (
 		'rolnicy',
 		'klasyfikacje',
 		'wiadomosci',
+		'szukajka',
 		'django_markdown',
 		'widget_tweaks',
 		'location_field',
 		'pagedown',
-    'szukajka',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7

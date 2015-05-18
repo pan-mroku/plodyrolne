@@ -30,6 +30,7 @@ def index(request):
         context={
             'szukaj_form': szukaj_form,
             'produkty_form': produkty_form,
+            'current_site':'szukaj-index'
             }
     if request.method == 'POST':
         szukaj_form = SzukajForm(request.POST)
@@ -37,6 +38,7 @@ def index(request):
         context={
             'szukaj_form': szukaj_form,
             'produkty_form': produkty_form,
+            'current_site':'szukaj-index'
             }
         if szukaj_form.is_valid() and produkty_form.is_valid():
             produkty = produkty_form.cleaned_data['produkty']
@@ -58,4 +60,5 @@ def index(request):
                 context['not_found'] = "Nie znaleziono rolników spełniajacych powyższe wymogi."
             else:
                 context['rolnicy'] = znalezieni
+            context['current_site']='szukaj-index'
     return render(request, 'szukajka_index.html', context)
