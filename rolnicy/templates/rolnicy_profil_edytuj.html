@@ -18,14 +18,14 @@
       <div class="panel-body">
         <form class="form-horizontal" method="POST">
           {% csrf_token %}
-          <ul class="list-unstyled">
+          <ul class="list-unstyled scrollable">
             {% render_field produkty_form.non_field_errors %}
             {% for field in produkty_form.produkty %}
             <li><small>{{field}}</small></li>
             {% endfor %}
           </ul>
-          <input type="submit" value="Wyślij" class="btn btn-primary" />
-        </form>
+					<input type="submit" value="Wyślij" class="btn btn-primary" />
+				</form>
       </div>
     </div>
   </div>

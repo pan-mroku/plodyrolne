@@ -15,12 +15,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <!-- google maps -->
   <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=true"></script>
-  <!-- skrypt z location_field -->
   {% load staticfiles %}
   <script type="text/javascript" src="{% static 'gmaps.min.js' %}"></script>
-
+  <!-- wczytaj css style z dodatkowymi ficzerami -->
+  <link href="{% static 'css/extra.css' %}" rel="stylesheet" type="text/css" />
   <!-- wczytuj statici dla formow, z jakiegos powodu musi byc w headzie -->
   {{form.media}}
-  {{ produktyform.media }}
   <script type="text/javascript" src="/admin/jsi18n/"></script>
 </head>
