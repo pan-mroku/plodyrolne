@@ -10,8 +10,8 @@ $(document).ready(function(){
 						callback: function(results, status){
 								if(status=='OK'){
 										var latlng = results[0].geometry.location;
-										map.setCenter(latlng.lat(), latlng.lng());
-										marker.setPosition(latlng);
+                    map.setCenter(latlng.lat(), latlng.lng());
+                    marker.setPosition(latlng);
 								};
 						}
 				});
@@ -60,10 +60,32 @@ $(document).ready(function(){
         marker.setPosition(mouseEvent.latLng);
         setAddress(mouseEvent.latLng);
     });
-		
+
 		geocode();
 		
 		$("#id_Adres").keypress(function(){
 				geocode();
 		});
+
+		$('tr[rolnik_url]').each(function(){
+        var $el = $(this);
+
+				var latlng = geocode($el.attr('rolnik_adres'));
+				GMaps.geocode({
+						address: $el.attr('rolnik_adres'),
+						callback: function(results, status){
+								if(status=='OK'){
+										var latlng = results[0].geometry.location;
+										map.addMarker({
+												lat: latlng.lat(),
+												lng: latlng.lng(),
+												icon: $el.attr('rolnik_icon'),
+												infoWindow: {
+														content: "<a href="+$el.attr('rolnik_url')+">"+$el.attr('rolnik_etykieta')+"</a>"
+												}
+										});
+								};
+						}
+				});
+    });
 });

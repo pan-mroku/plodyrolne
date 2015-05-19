@@ -70,7 +70,7 @@
 			<div class="panel-body">
 				<table class="table table-striped">
 					{% for rolnik in rolnicy %}
-					<tr>
+					<tr rolnik_url="{% url 'rolnicy-profil' id=rolnik.id %}" rolnik_etykieta="{{ rolnik.Imie }} {{ rolnik.Nazwisko }}<br>{{ rolnik.Adres}}" rolnik_adres="{{rolnik.Adres}}" rolnik_icon="{% static 'img/logofinalagros_mini.png' %}">
 						<td><a href="{% url 'rolnicy-profil' id=rolnik.id %}">{{ rolnik.Imie }} {{ rolnik.Nazwisko }}</a></td>
 						<td><a href="{% url 'rolnicy-profil' id=rolnik.id %}">{{ rolnik.Adres }}</a></td>
 					</tr>

@@ -23,18 +23,18 @@ $(document).ready(function(){
 		//Po namyśle to chyba średni pomysł
 		//http://stackoverflow.com/questions/5884644/calculate-the-current-location-longtitude-and-latitude
 		// navigator.geolocation.getCurrentPosition(
-		// 		function(pos){
-		// 				init_lat = pos.coords.latitude;
-		// 				init_lng = pos.coords.longitude;
-		// 				// send coordinates to server, or display on map, if you wish
-		// 				//buildMarker(map, lat, long, "TEST", 'red');
-		// 				//alert("your position is:"+lat+";"+long);
-		// 				$('#id_Adres').val(init_lat+", "+init_lng);
-		// 				geocode();
-		// 		},
-		// 		function(){
-		// 				/* Handler if location could not be found */
-		// 		});
+		//		function(pos){
+		//				init_lat = pos.coords.latitude;
+		//				init_lng = pos.coords.longitude;
+		//				// send coordinates to server, or display on map, if you wish
+		//				//buildMarker(map, lat, long, "TEST", 'red');
+		//				//alert("your position is:"+lat+";"+long);
+		//				$('#id_Adres').val(init_lat+", "+init_lng);
+		//				geocode();
+		//		},
+		//		function(){
+		//				/* Handler if location could not be found */
+		//		});
 		
 		map = new GMaps({
 				div: '#gmap',
@@ -50,13 +50,13 @@ $(document).ready(function(){
 		});
 
 		google.maps.event.addListener(marker, 'dragend', function(mouseEvent) {
-        setAddress(mouseEvent.latLng);
-    });
+				setAddress(mouseEvent.latLng);
+		});
 
-    google.maps.event.addListener(map, 'click', function(mouseEvent){
-        marker.setPosition(mouseEvent.latLng);
-        setAddress(mouseEvent.latLng);
-    });
+		google.maps.event.addListener(map, 'click', function(mouseEvent){
+				marker.setPosition(mouseEvent.latLng);
+				setAddress(mouseEvent.latLng);
+		});
 		
 		geocode();
 		

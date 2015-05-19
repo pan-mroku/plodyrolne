@@ -8,12 +8,11 @@ from szukajka.forms import SzukajForm
 from rolnicy.models import ProduktyForm
 
 #http://stackoverflow.com/questions/1502590/calculate-distance-between-two-points-in-google-maps-v3
-def countDistance(jsonlatlong, locationlatlong):
-    lat1 = float(jsonlatlong['lat'])
-    lng1 = float(jsonlatlong['lng'])
-    lat2, lng2 = locationlatlong.split(',')
-    lat2 = float(lat2)
-    lng2 = float(lng2)
+def countDistance(latlong1, latlong2):
+    lat1 = float(latlong1['lat'])
+    lng1 = float(latlong1['lng'])
+    lat2 = float(latlong2['lat'])
+    lng2 = float(latlong2['lng'])
     
     R = 6378137; # Earth’s mean radius in meter
     dLat = radians(lat2 - lat1);
@@ -45,10 +44,13 @@ def index(request):
             rolnicy = Rolnik.objects.all()
             znalezieni = []
             for rolnik in rolnicy:
-                google_maps_json = requests.get("http://maps.googleapis.com/maps/api/geocode/json",
+                rolnik_google_maps_json = requests.get("http://maps.googleapis.com/maps/api/geocode/json",
                     params = {'address' : rolnik.Adres, 'sensor' : 'false'}).json()
-                location = google_maps_json['results'][0]['geometry']['location']
-                if countDistance(location, szukaj_form.cleaned_data['Adres']) <= szukaj_form.cleaned_data['Odległość']:
+                rolnik_location = rolnik_google_maps_json['results'][0]['geometry']['location']
+                my_google_maps_json = requests.get("http://maps.googleapis.com/maps/api/geocode/json",
+                    params = {'address' : szukaj_form.cleaned_data['Adres'], 'sensor' : 'false'}).json()
+                my_location = my_google_maps_json['results'][0]['geometry']['location']
+                if countDistance(my_location, rolnik_location) <= szukaj_form.cleaned_data['Odległość']:
                     if not produkty:
                         znalezieni.append(rolnik)
                     else:
