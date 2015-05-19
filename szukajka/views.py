@@ -48,7 +48,7 @@ def index(request):
                 google_maps_json = requests.get("http://maps.googleapis.com/maps/api/geocode/json",
                     params = {'address' : rolnik.Adres, 'sensor' : 'false'}).json()
                 location = google_maps_json['results'][0]['geometry']['location']
-                if countDistance(location, szukaj_form.cleaned_data['location']) <= szukaj_form.cleaned_data['distance']:
+                if countDistance(location, szukaj_form.cleaned_data['Adres']) <= szukaj_form.cleaned_data['Odległość']:
                     if not produkty:
                         znalezieni.append(rolnik)
                     else:

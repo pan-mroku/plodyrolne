@@ -2,6 +2,7 @@
 {% load widget_tweaks %}
 {% load staticfiles %}
 {% block content %}
+<script type="text/javascript" src="{% static 'gmaps_szukaj.js' %}"></script>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 	<form class="form-horizontal" method="POST">
 		{% csrf_token %}
@@ -42,6 +43,9 @@
 									{% endif %}
 									<span class="input-group-addon">{{field.label}}</span>
 									{% render_field field class="form-control" %}
+									{% ifequal field.name 'Adres' %}
+									<div id="gmap" style="width: 500px; height: 250px"></div>
+									{% endifequal %}
 								</div>
 							</div>
 						</div>
@@ -86,23 +90,4 @@
 	</div>
 	{% endif %}
 	</div>
-	<script>
-		//http://stackoverflow.com/questions/5884644/calculate-the-current-location-longtitude-and-latitude
-		navigator.geolocation.getCurrentPosition(
-		function(pos){
-		var lat = pos.coords.latitude;
-		var long = pos.coords.longitude;
-		// send coordinates to server, or display on map, if you wish
-		//buildMarker(map, lat, long, "TEST", 'red');
-		//alert("your position is:"+lat+";"+long);
-		$('#id_location').val(lat+", "+long);
-		$('#id_address').val(lat+", "+long);
-		$("#id_address").focus();
-		},
-		function(){
-		/* Handler if location could not be found */
-		}
-		);
-
-	</script>
 	{% endblock %}
