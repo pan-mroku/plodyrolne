@@ -123,7 +123,7 @@ STATIC_ROOT = STATIC_URL
 #STATIC_URL = '/c/Users/nao/PythonProjects/plodyrolne/static/'
 #STATIC_ROOT = '/c/Users/nao/PythonProjects/plodyrolne/static/'
 STATICFILES_DIRS=(
-    os.path.join(PROJECT_PATH, '../www/static'),
+    os.path.join(PROJECT_PATH, '../static'),
     )
 
 SITE_ID=2
