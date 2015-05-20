@@ -34,12 +34,14 @@ def parse():
         indeks_ostatniej_kropki = symbol.symbol.rfind('.')
         if indeks_ostatniej_kropki != -1:
             try:
-                rodzic = SymbolPKWIU.objects.get(symbol=symbol.symbol[:indeks_ostatniej_kropki])
+                rodzice = SymbolPKWIU.objects.filter(symbol=symbol.symbol[:indeks_ostatniej_kropki])
             except IntegrityError:
                 print(symbol.symbol+" "+nazwa.nazwa+" "+"nie znaleziono rodzica "+nazwa.nazwa[:indeks_ostatniej_kropki])
                 err+=1
-            rodzic.dzieci.add(symbol)
-            rodzic.save()
+            if len(rodzice) >0:
+                rodzic=rodzice[0]
+                rodzic.dzieci.add(symbol)
+                rodzic.save()
     print('bledy: '+str(err))
     return True
 
