@@ -5,6 +5,7 @@ from rolnicy.models import RolnikForm, Rolnik
 from registration.users import UserModel
 from django.contrib.auth import authenticate, login
 from registration import signals
+from django.contrib.auth.forms import AuthenticationForm
 
 def register(request):
     if request.method=="GET":
@@ -21,3 +22,8 @@ def register(request):
         return redirect('rolnicy-mojprofil')
     context={'form': form}
     return render(request, 'registration/registration_form.html', context)
+
+def login(request):
+    if request.method=="GET":
+        return render(request, 'registration/login.html', {'form': AuthenticationForm()})
+    print("asd")

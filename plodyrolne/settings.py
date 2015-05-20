@@ -51,7 +51,7 @@ INSTALLED_APPS = (
 ACCOUNT_ACTIVATION_DAYS = 7
 #?
 #LOGIN_URL='/login'
-#LOGIN_REDIRECT_URL='/rolnicy/mojprofil;'
+LOGIN_REDIRECT_URL='rolnicy-wszyscy'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

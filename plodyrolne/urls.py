@@ -6,6 +6,7 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
 
+from rejestracja import views as rejestracja_views
 
 admin.autodiscover()
 urlpatterns = patterns('',
@@ -15,8 +16,7 @@ urlpatterns = patterns('',
     url(r'^rejestracja/', include('rejestracja.urls')),
     url(r'^klasyfikacje/', include('klasyfikacje.urls')),
     url(r'^wiadomosci/', include('wiadomosci.urls')),
-    url(r'^accounts/login/$', auth_views.login),
-    url(r'^accounts/profile/$', RedirectView.as_view(url=reverse_lazy('rolnicy-mojprofil'))),
+#    url(r'^login/', rejestracja_views.login, name='login'),
     url(r'^login/', auth_views.login, {'template_name': 'registration/login.html'}, name='login'),
     url(r'^logout/', auth_views.logout, {'template_name': 'welcome.html'}, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
