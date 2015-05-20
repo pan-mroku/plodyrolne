@@ -27,29 +27,29 @@ SECRET_KEY = '+2$_v36nz=uwuy4@g!rhn9-on@d3e32az-5d!$&pp_=762)h$f'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-		'szyszko.no-ip.org',
-		'osgiliath',
-		]
+    'szyszko.no-ip.org',
+    'osgiliath',
+    ]
 
 
 # Application definition
 INSTALLED_APPS = (
-		'django.contrib.admin',
-		'django.contrib.auth',
-		'django.contrib.contenttypes',
-		'django.contrib.sessions',
-		'django.contrib.messages',
-		'django.contrib.staticfiles',
-		'django.contrib.sites',
-		'registration',
-		'rejestracja',
-		'rolnicy',
-		'klasyfikacje',
-		'wiadomosci',
-		'szukajka',
-		'django_markdown',
-		'widget_tweaks',
-		'pagedown',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'registration',
+    'rejestracja',
+    'rolnicy',
+    'klasyfikacje',
+    'wiadomosci',
+    'szukajka',
+    'django_markdown',
+    'widget_tweaks',
+    'pagedown',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -58,32 +58,32 @@ ACCOUNT_ACTIVATION_DAYS = 7
 #LOGIN_REDIRECT_URL='/rolnicy/mojprofil;'
 
 MIDDLEWARE_CLASSES = (
-		'django.contrib.sessions.middleware.SessionMiddleware',
-		'django.middleware.common.CommonMiddleware',
-		'django.middleware.csrf.CsrfViewMiddleware',
-		'django.contrib.auth.middleware.AuthenticationMiddleware',
-		'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-		'django.contrib.messages.middleware.MessageMiddleware',
-		'django.middleware.clickjacking.XFrameOptionsMiddleware',
-		'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'plodyrolne.urls'
 
 TEMPLATES = [
-		{
-				'BACKEND': 'django.template.backends.django.DjangoTemplates',
-				'DIRS': [os.path.join(PROJECT_PATH, 'templates')],
-				'APP_DIRS': True,
-				'OPTIONS': {
-						'context_processors': [
-								'django.template.context_processors.debug',
-								'django.template.context_processors.request',
-								'django.contrib.auth.context_processors.auth',
-								'django.contrib.messages.context_processors.messages',
-						],
-				},
-		},
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(PROJECT_PATH, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
 ]
 
 WSGI_APPLICATION = 'plodyrolne.wsgi.application'
@@ -93,10 +93,10 @@ WSGI_APPLICATION = 'plodyrolne.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-		'default': {
-				'ENGINE': 'django.db.backends.sqlite3',
-				'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-		}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 
@@ -117,24 +117,29 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-USE_LOCAL_STATIC = True
-if USE_LOCAL_STATIC:
-		STATIC_URL= os.path.join(BASE_DIR, '/static/')
-		STATIC_ROOT = STATIC_URL
-else:
-		STATIC_URL = 'http://szyszko.no-ip.org/static/'
-		STATIC_ROOT = '/srv/http/static/'
+STATIC_URL= os.path.join(BASE_DIR, '/static/')
+STATIC_ROOT = STATIC_URL
+
 #STATIC_URL = '/c/Users/nao/PythonProjects/plodyrolne/static/'
 #STATIC_ROOT = '/c/Users/nao/PythonProjects/plodyrolne/static/'
 STATICFILES_DIRS=(
-		os.path.join(PROJECT_PATH, '../static'),
-		)
+    os.path.join(PROJECT_PATH, '../www/static'),
+    )
 
 SITE_ID=2
 
 MARKDOWN_EXTENSIONS = 'extra', 'codehilite'
 MARKDOWN_EXTENSION_CONFIGS = {
-		'codehilite': {
-				'linenums': False,
-		}
+    'codehilite': {
+        'linenums': False,
+    }
 }
+
+try:
+    from secrets import *
+    USE_LOCAL_STATIC = False
+    DEBUG=False
+    STATIC_URL = 'http://szyszko.no-ip.org/static/'
+    STATIC_ROOT = '/srv/http/www/static/'
+except:
+    pass

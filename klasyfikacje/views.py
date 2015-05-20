@@ -5,12 +5,16 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from urllib.request import urlopen, urlretrieve
 from django.utils.translation import ugettext_lazy as _
+from platform import system
 # Create your views here.
 from .models import *
 
 
 def parse():
-    strona=urlopen("http://www.klasyfikacje.gofin.pl/pkwiu/1,2,2,produkty-rolnictwa-i-lowiectwa-oraz-uslugi-wspomagajace.html#D01").read().decode('ISO-8859-2')
+    if system() == 'Windows':
+        strona = urlopen("http://www.klasyfikacje.gofin.pl/pkwiu/1,2,2,produkty-rolnictwa-i-lowiectwa-oraz-uslugi-wspomagajace.html#D01").read().decode('ISO-8859-2')
+   else:
+       strona=urlopen("http://www.klasyfikacje.gofin.pl/pkwiu/1,2,2,produkty-rolnictwa-i-lowiectwa-oraz-uslugi-wspomagajace.html#D01").read().decode('UTF-8')
     soup=BeautifulSoup(strona)
     spis = soup.findAll("table", { "class" : "spis" })
     wiersze = spis[0].find_all('tr')
@@ -18,7 +22,7 @@ def parse():
     for wiersz in wiersze[2:]:
         cols = wiersz.find_all('td')
         cols = [ele.text.strip() for ele in cols]
-
+        
         try:
             nazwa, _dontcare = NazwaGrupowania.objects.get_or_create(nazwa=cols[1])
             nazwa.save()
