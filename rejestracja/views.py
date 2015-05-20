@@ -22,8 +22,3 @@ def register(request):
         return redirect('rolnicy-mojprofil')
     context={'form': form}
     return render(request, 'registration/registration_form.html', context)
-
-def login(request):
-    if request.method=="GET":
-        return render(request, 'registration/login.html', {'form': AuthenticationForm()})
-    print("asd")
