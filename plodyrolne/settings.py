@@ -16,10 +16,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
-try:
-    from secrets import *
-except ImportError:
-    pass
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -27,14 +23,10 @@ except ImportError:
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '+2$_v36nz=uwuy4@g!rhn9-on@d3e32az-5d!$&pp_=762)h$f'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = [
     'szyszko.no-ip.org',
     'osgiliath',
     ]
-
 
 # Application definition
 INSTALLED_APPS = (
@@ -92,7 +84,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'plodyrolne.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
@@ -118,14 +109,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-
-STATIC_URL= os.path.join(BASE_DIR, '/static/')
-STATIC_ROOT = STATIC_URL
-
-#STATIC_URL = '/c/Users/nao/PythonProjects/plodyrolne/static/'
-#STATIC_ROOT = '/c/Users/nao/PythonProjects/plodyrolne/static/'
 STATICFILES_DIRS=(
     os.path.join(PROJECT_PATH, '../static'),
     )
@@ -138,3 +121,13 @@ MARKDOWN_EXTENSION_CONFIGS = {
         'linenums': False,
     }
 }
+
+try:
+    from secrets import *
+except ImportError:
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = True
+    STATIC_URL= os.path.join(BASE_DIR, '/static/')
+    STATIC_ROOT = STATIC_URL
+    #STATIC_URL = '/c/Users/nao/PythonProjects/plodyrolne/static/'
+    #STATIC_ROOT = '/c/Users/nao/PythonProjects/plodyrolne/static/'
