@@ -137,9 +137,5 @@ MARKDOWN_EXTENSION_CONFIGS = {
 
 try:
     from secrets import *
-    USE_LOCAL_STATIC = False
-    DEBUG=False
-    STATIC_URL = 'http://szyszko.no-ip.org/static/'
-    STATIC_ROOT = '/srv/http/www/static/'
-except:
+except ImportError:
     pass
