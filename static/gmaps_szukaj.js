@@ -1,11 +1,14 @@
+adres=$('#id_Adres');
+
 function setAddress(point)
 {
 		map.panTo(point);
-		$('#id_Adres').val(point.lat()+", "+point.lng());
+		adres.val(point.lat()+", "+point.lng());
+		marker.setPosition(point);
 }
 function geocode() {
 		GMaps.geocode({
-				address: $('#id_Adres').val().trim(),
+				address: adres.val().trim(),
 				callback: function(results, status){
 						if(status=='OK'){
 								var latlng = results[0].geometry.location;
@@ -21,7 +24,7 @@ var init_lng = 20;
 
 //http://stackoverflow.com/questions/5884644/calculate-the-current-location-longtitude-and-latitude
 //Nie pytaj o położenie, jeśli coś zostało wpisane (czyli nie przyszliśmy getem) ^^
-if ($('#id_Adres').val() == '') {
+if (adres.val() == '') {
 		navigator.geolocation.getCurrentPosition(
 				function(pos){
 						init_lat = pos.coords.latitude;
@@ -29,8 +32,7 @@ if ($('#id_Adres').val() == '') {
 						// send coordinates to server, or display on map, if you wish
 						//buildMarker(map, lat, long, "TEST", 'red');
 						//alert("your position is:"+lat+";"+long);
-						$('#id_Adres').val(init_lat+", "+init_lng);
-						geocode();
+						setAddress(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
 				},
 				function(){
 						/* Handler if location could not be found */
@@ -44,7 +46,7 @@ map = new GMaps({
 		zoom: 6
 });
 
-$('#id_Adres').val(init_lat+", "+init_lng);
+adres.val(init_lat+", "+init_lng);
 
 var marker = map.addMarker({
 		lat: init_lat,
@@ -61,7 +63,7 @@ google.maps.event.addListener(map, 'click', function(mouseEvent){
     setAddress(mouseEvent.latLng);
 });
 
-geocode();
+//geocode();
 
 $("#id_Adres").keypress(function(){
 		geocode();
