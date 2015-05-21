@@ -2,7 +2,6 @@
 {% load widget_tweaks %}
 {% load staticfiles %}
 {% block content %}
-<script type="text/javascript" src="{% static 'gmaps_profil.js' %}"></script>
 <h3>Profil rolnika: {{rolnik.Imie}} {{rolnik.Nazwisko}}</h3>
 <hr>
 <dl class="dl-horizontal">
@@ -30,5 +29,6 @@
 	<dd>Brak</dd>
 	{% endif %}
 </dl>
+<script type="text/javascript" src="{% static 'gmaps_profil.js' %}"></script>
 {% endblock %}
 
