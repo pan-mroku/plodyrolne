@@ -18,5 +18,4 @@ urlpatterns = patterns('',
     url(r'^logout/', auth_views.logout, {'template_name': 'welcome.html'}, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^markdown/', include('django_markdown.urls')),
-    url(r'^admin/jsi18n', 'django.views.i18n.javascript_catalog'),
 )

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.decorators.cache import cache_control
 
 from registration.views import RegistrationView
 from rolnicy.models import RolnikForm, Rolnik
@@ -6,10 +7,12 @@ from registration.users import UserModel
 from django.contrib.auth import authenticate, login
 from registration import signals
 from django.contrib.auth.forms import AuthenticationForm
-
+@cache_control(no_cache=True)
 def register(request):
     if request.method=="GET":
-        return render(request, 'registration/registration_form.html', {'form': RolnikForm()})
+        form = RolnikForm()
+        form.email
+        return render(request, 'registration/registration_form.html', {'form': form})
     form=RolnikForm(request.POST)
     if form.is_valid():
         email=form.cleaned_data['email']
