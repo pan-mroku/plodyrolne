@@ -1,5 +1,6 @@
 from math import radians, sin, cos, atan2, sqrt
 from django.shortcuts import render
+from django.views.decorators.cache import cache_page
 from rolnicy.models import Rolnik
 import requests
 
@@ -22,6 +23,7 @@ def countDistance(latlong1, latlong2):
     d = R * c;
     return d/1000.0; # returns the distance in kilometer
 
+@cache_page(60 * 15)
 def index(request):
     if request.method == 'GET':
         szukaj_form = SzukajForm()
