@@ -32,9 +32,9 @@ class RolnikForm(forms.ModelForm):
     class Meta:
         model = Rolnik
         fields = [
+            'email',
             'Imie',
             'Nazwisko',
-            'email',
             'Adres',
             ]
         labels = {
@@ -60,10 +60,18 @@ class RolnikForm(forms.ModelForm):
         else:
             return self.cleaned_data['email']
 
+    def clean_password1(self):
+        return self.cleaned_data['password1']
+
+    def clean_password2(self):
+        return self.cleaned_data['password2']
+
     def clean(self):
         if self.instance.pk != None:
             if 'password1' not in self.cleaned_data and 'password2' not in self.cleaned_data:
                 return self.cleaned_data
+        if 'password1' not in self.cleaned_data or 'password2' not in self.cleaned_data:
+            raise forms.ValidationError(_("The two password fields didn't match."))
         if self.cleaned_data['password1'] != self.cleaned_data['password2']:
             raise forms.ValidationError(_("The two password fields didn't match."))
                 
