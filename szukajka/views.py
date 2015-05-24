@@ -23,7 +23,7 @@ def countDistance(latlong1, latlong2):
     d = R * c;
     return d/1000.0; # returns the distance in kilometer
 
-@cache_page(60 * 15)
+#@cache_page(60 * 15)
 def index(request):
     if request.method == 'GET':
         szukaj_form = SzukajForm()
