@@ -16,3 +16,10 @@ GMaps.geocode({
 				}
 		}
 });
+
+(function protect_me(){
+		var email_protection = $('dd[badunkadunk]');
+		var first = email_protection.attr('badunkadunk')
+		var second = email_protection.attr('badunkadank')
+		email_protection.html(first+'@'+second)
+}());
