@@ -15,7 +15,7 @@
 			</div>
 			<div id="produktyDiv">
 				<p>Wczytywanie produktów...</p>
-				{% include "szukajka_produkty.html" %}
+
 			</div>
 			<!-- nie moze byc jako odnosnik do js, bo trzeba by walnac statycznego urla :p-->
 			<script>$("#produktyDiv").load("{% url 'szukaj-produkty' %}");</script>
