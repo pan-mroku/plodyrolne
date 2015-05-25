@@ -1,0 +1,11 @@
+{% load widget_tweaks %}
+<div id="collapse0" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading0">
+    <div class="panel-body">
+        <ul class="list-unstyled scrollable">
+            {% render_field produkty_form.non_field_errors %}
+            {% for field in produkty_form.produkty %}
+            <li><small>{{field}}</small></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

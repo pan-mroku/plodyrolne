@@ -1,9 +1,9 @@
 from math import radians, sin, cos, atan2, sqrt
+from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.decorators.cache import cache_page
+from django.template.loader import render_to_string
 from rolnicy.models import Rolnik
 import requests
-
 
 from szukajka.forms import SzukajForm
 from rolnicy.models import ProduktyForm
@@ -23,14 +23,18 @@ def countDistance(latlong1, latlong2):
     d = R * c;
     return d/1000.0; # returns the distance in kilometer
 
+
+def produkty_ajax(request):
+    #return_str = render_block_to_string('szukajka_produkty.html','produkty',{'produkty_form':ProduktyForm()})
+    return HttpResponse(render_to_string("szukajka_produkty.html", {'produkty_form':ProduktyForm()}))
+
+
 #@cache_page(60 * 15)
 def index(request):
     if request.method == 'GET':
         szukaj_form = SzukajForm()
-        produkty_form = ProduktyForm()
         context={
             'szukaj_form': szukaj_form,
-            'produkty_form': produkty_form,
             'current_site':'szukaj-index'
             }
     if request.method == 'POST':
@@ -41,28 +45,29 @@ def index(request):
             'produkty_form': produkty_form,
             'current_site':'szukaj-index'
             }
-        if szukaj_form.is_valid() and produkty_form.is_valid():
-            produkty = produkty_form.cleaned_data['produkty']
-            rolnicy = Rolnik.objects.all()
-            znalezieni = []
-            for rolnik in rolnicy:
-                rolnik_google_maps_json = requests.get("http://maps.googleapis.com/maps/api/geocode/json",
-                    params = {'address' : rolnik.Adres, 'sensor' : 'false'}).json()
-                rolnik_location = rolnik_google_maps_json['results'][0]['geometry']['location']
-                my_google_maps_json = requests.get("http://maps.googleapis.com/maps/api/geocode/json",
-                    params = {'address' : szukaj_form.cleaned_data['Adres'], 'sensor' : 'false'}).json()
-                my_location = my_google_maps_json['results'][0]['geometry']['location']
-                if countDistance(my_location, rolnik_location) <= szukaj_form.cleaned_data['Odległość']:
-                    if not produkty:
-                        znalezieni.append(rolnik)
-                    else:
-                        for produkt in produkty:
-                            if produkt in rolnik.produkty.all():
-                                znalezieni.append(rolnik)
-                                break
-            if not znalezieni:
-                context['not_found'] = "Nie znaleziono rolników spełniajacych powyższe wymogi."
-            else:
-                context['rolnicy'] = znalezieni
-            context['current_site']='szukaj-index'
+        if produkty_form is not None:
+            if szukaj_form.is_valid() and produkty_form.is_valid():
+                produkty = produkty_form.cleaned_data['produkty']
+                rolnicy = Rolnik.objects.all()
+                znalezieni = []
+                for rolnik in rolnicy:
+                    rolnik_google_maps_json = requests.get("http://maps.googleapis.com/maps/api/geocode/json",
+                        params = {'address' : rolnik.Adres, 'sensor' : 'false'}).json()
+                    rolnik_location = rolnik_google_maps_json['results'][0]['geometry']['location']
+                    my_google_maps_json = requests.get("http://maps.googleapis.com/maps/api/geocode/json",
+                        params = {'address' : szukaj_form.cleaned_data['Adres'], 'sensor' : 'false'}).json()
+                    my_location = my_google_maps_json['results'][0]['geometry']['location']
+                    if countDistance(my_location, rolnik_location) <= szukaj_form.cleaned_data['Odległość']:
+                        if not produkty:
+                            znalezieni.append(rolnik)
+                        else:
+                            for produkt in produkty:
+                                if produkt in rolnik.produkty.all():
+                                    znalezieni.append(rolnik)
+                                    break
+                if not znalezieni:
+                    context['not_found'] = "Nie znaleziono rolników spełniajacych powyższe wymogi."
+                else:
+                    context['rolnicy'] = znalezieni
+                context['current_site']='szukaj-index'
     return render(request, 'szukajka_index.html', context)

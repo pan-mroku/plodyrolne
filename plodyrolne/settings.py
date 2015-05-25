@@ -138,5 +138,3 @@ except ImportError:
     DEBUG = True
     STATIC_URL= os.path.join(BASE_DIR, '/static/')
     STATIC_ROOT = STATIC_URL
-    #STATIC_URL = '/c/Users/nao/PythonProjects/plodyrolne/static/'
-    #STATIC_ROOT = '/c/Users/nao/PythonProjects/plodyrolne/static/'
