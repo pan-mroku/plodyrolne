@@ -37,27 +37,27 @@
 							{% if field.errors %}
 							<div class="input-group has-error">
 								<span class="input-group-addon">{{field.errors.as_text}}</span>
-								{% else %}
-								<div class="input-group">
-									{% endif %}
-									<span class="input-group-addon">{{field.label}}</span>
-									{% render_field field class="form-control" %}
-									{% ifequal field.name 'Odległość' %}
-									<span class="input-group-addon">km</span>
-									{% endifequal %}
-									{% ifequal field.name 'Adres' %}
-									<div id="gmap" style="width: 500px; height: 250px"></div>
-									{% endifequal %}
-								</div>
+							{% else %}
+							<div class="input-group">
+							{% endif %}
+								<span class="input-group-addon">{{field.label}}</span>
+								{% render_field field class="form-control" %}
+								{% ifequal field.name 'Odległość' %}
+								<span class="input-group-addon">km</span>
+								{% endifequal %}
 							</div>
+							{% ifequal field.name 'Adres' %}
+							<div id="gmap" style="height: 250px"></div>
+							{% endifequal %}
 						</div>
-						{% endfor %}
 					</div>
-				</div>
-				<div class="panel-body">
-					<input type="submit" value="Szukaj" class="btn btn-primary" />
+					{% endfor %}
 				</div>
 			</div>
+			<div class="panel-body">
+				<input type="submit" value="Szukaj" class="btn btn-primary" />
+			</div>
+		</div>
 	</form>
 	{% if rolnicy %}
 	<div class="panel panel-default">
@@ -91,6 +91,6 @@
 		</div>
 	</div>
 	{% endif %}
-	</div>
-	<script type="text/javascript" src="{% static 'gmaps_szukaj.js' %}"></script>
-	{% endblock %}
+</div>
+<script type="text/javascript" src="{% static 'gmaps_szukaj.js' %}"></script>
+{% endblock %}
