@@ -15,7 +15,8 @@ def profil(request, id):
     rolnik=Rolnik.objects.filter(id=id)
     if rolnik.count()==0:
         return redirect('rolnicy.views.wszyscy')
-    context={'rolnik': rolnik[0]}
+    badunkadunk, badunkadank = rolnik[0].user.email.split('@')
+    context={'rolnik': rolnik[0], 'badunkadunk': badunkadunk, 'badunkadank': badunkadank}
     return render(request, 'rolnicy_profil.html', context)
 
 @login_required

@@ -37,6 +37,10 @@ if (adres.val() == '') {
 				function(){
 						/* Handler if location could not be found */
 				});
+		adres.val(init_lat+", "+init_lng);
+}
+else {
+		geocode();
 }
 
 map = new GMaps({
@@ -45,8 +49,6 @@ map = new GMaps({
 		lng: init_lng,
 		zoom: 6
 });
-
-adres.val(init_lat+", "+init_lng);
 
 var marker = map.addMarker({
 		lat: init_lat,
@@ -62,8 +64,6 @@ google.maps.event.addListener(map, 'click', function(mouseEvent){
     marker.setPosition(mouseEvent.latLng);
     setAddress(mouseEvent.latLng);
 });
-
-//geocode();
 
 $("#id_Adres").keypress(function(){
 		geocode();
